@@ -8,8 +8,7 @@ public class Pila<E> implements Stack<E>{
     private int cant;
 
     public Pila() {
-        this.arreglo = (E[]) new Object[10];
-        this.cant = 0;
+        this(10);
     }
 
     public Pila(int tam) {
