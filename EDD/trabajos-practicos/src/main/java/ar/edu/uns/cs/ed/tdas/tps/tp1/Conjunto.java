@@ -1,3 +1,5 @@
+package ar.edu.uns.cs.ed.tdas.tps.tp1;
+
 public interface Conjunto<E> {
     
     public int size();

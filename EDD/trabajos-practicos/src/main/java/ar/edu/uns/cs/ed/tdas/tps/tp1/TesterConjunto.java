@@ -1,3 +1,5 @@
+package ar.edu.uns.cs.ed.tdas.tps.tp1;
+
 public class TesterConjunto {
     public static void main(String[] a) {
         Conjunto<Integer> c1 = new ConjuntoArreglo<Integer>(3);

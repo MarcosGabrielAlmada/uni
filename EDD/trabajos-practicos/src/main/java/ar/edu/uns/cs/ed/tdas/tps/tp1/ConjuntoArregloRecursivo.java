@@ -1,8 +1,10 @@
-public class ConjuntoArreglo<E> implements Conjunto<E> {
+package ar.edu.uns.cs.ed.tdas.tps.tp1;
+
+public class ConjuntoArregloRecursivo<E> implements Conjunto<E> {
     private E conjunto[];
     private int cant;
 
-    public ConjuntoArreglo(int i) {
+    public ConjuntoArregloRecursivo(int i) {
         this.conjunto = (E[]) new Object[i];
         this.cant = 0;
     }
@@ -35,13 +37,19 @@ public class ConjuntoArreglo<E> implements Conjunto<E> {
     }
 
     public boolean pertenece(E elem) {
-        boolean esta = false;
-        for (int i = 0; i < this.capacity() && !esta; i++) {
-            if (this.get(i) == elem) {
-                esta = true;
-            }
+        return perteneceRecursivo(elem, cant);
+    }
+
+    public boolean perteneceRecursivo(E elem, int length) {
+        boolean res;
+        if (this.get(length - 1) == elem) {
+            res = true;
+        } else if (length > 0){
+            res =  perteneceRecursivo(elem, length - 1);
+        } else {
+            res = false;
         }
-        return esta;
+        return res;
     }
 
     public Conjunto<E> interseccion(Conjunto<E> c) {

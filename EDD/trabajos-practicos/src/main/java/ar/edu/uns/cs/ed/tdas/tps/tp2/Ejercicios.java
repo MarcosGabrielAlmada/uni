@@ -1,4 +1,4 @@
-package TP2;
+package ar.edu.uns.cs.ed.tdas.tps.tp2;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -30,7 +30,7 @@ public class Ejercicios<A> {
         for (int i = 0; i < capacity; i++) {
             aux = cola1.remove();
             if (aux % 2 == 1) {
-                cola2.push(aux);
+                cola2.add(aux);
             }
         }
 
