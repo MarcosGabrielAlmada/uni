@@ -1,5 +1,5 @@
 
-/**
+/**5
  * Class: StackTest
  * @author María Luján Ganuza (mlg@cs.uns.edu.ar)
  *         Estructuras de Datos _ Primer Cuatrimestre 2013
@@ -8,6 +8,7 @@
  */
 
 package ar.edu.uns.cs.ed.tdas.tdapila;
+import ar.edu.uns.cs.ed.tdas.tps.tp3.Pila;
 import org.junit.*;                         //For tags
 import static org.junit.Assert.*;           //For assertions
 
@@ -21,7 +22,7 @@ public class StackTest {
 	private Stack<String> getStack()
 	{
 		Stack<String> pila = null;
-		//pila = new PilaConLista<String>(); //TODO: Descomentar y crear instancia del TDA a testear
+		pila = new Pila<String>(); //TODO: Descomentar y crear instancia del TDA a testear
 		return pila;	  
 	 }
 	
