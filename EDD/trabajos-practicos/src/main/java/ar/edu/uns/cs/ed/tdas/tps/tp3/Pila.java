@@ -32,7 +32,7 @@ public class Pila<E> implements Stack<E>{
     }
 
 	public void push(E element) {
-        if (this.cant <= this.arreglo.length) {
+        if (this.cant < this.arreglo.length) {
             this.arreglo[this.cant++] = element;
         } else {
             E[] aux = (E[]) new Object[this.cant + 10];
