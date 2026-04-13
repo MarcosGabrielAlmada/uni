@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Mesa
+comment1.params=n
+comment1.target=Mesa(int)
+comment2.params=
+comment2.target=void\ ocupar()
+comment3.params=
+comment3.target=void\ liberar()
+comment4.params=
+comment4.target=int\ obtenerNumero()
+comment5.params=
+comment5.target=ColCombos\ obtenerPedido()
+comment6.params=
+comment6.target=boolean\ estaOcupada()
+comment7.params=
+comment7.target=boolean\ alcanzoMaximoPedidos()
+comment8.params=
+comment8.target=java.lang.String\ generarTicketCuenta()
+comment9.params=
+comment9.target=java.lang.String\ generarDetalleParcial()
+numComments=10

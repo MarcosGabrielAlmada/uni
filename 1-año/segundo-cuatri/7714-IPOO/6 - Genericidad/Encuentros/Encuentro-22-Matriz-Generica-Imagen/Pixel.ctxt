@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Pixel
+comment1.params=pr\ pb\ pg
+comment1.target=Pixel(int,\ int,\ int)
+comment10.params=
+comment10.target=Elemento\ clone()
+comment2.params=pr
+comment2.target=void\ establecerR(int)
+comment3.params=pb
+comment3.target=void\ establecerB(int)
+comment4.params=pg
+comment4.target=void\ establecerG(int)
+comment5.params=
+comment5.target=int\ obtenerR()
+comment6.params=
+comment6.target=int\ obtenerB()
+comment7.params=
+comment7.target=int\ obtenerG()
+comment8.params=e
+comment8.target=boolean\ equals(Elemento)
+comment9.params=
+comment9.target=boolean\ esNeutro()
+numComments=11

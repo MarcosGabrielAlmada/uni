@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=MiVentanaColor
+comment1.params=titulo\ col
+comment1.target=MiVentanaColor(java.lang.String,\ java.awt.Color)
+numComments=2

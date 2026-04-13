@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="p3a.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="5"/>
+        <CursorPos X="52" Y="15"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="13">
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="12" Column="12"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="10" Column="61"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="11" Column="62"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="10" Column="55"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="14" Column="67"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="10" Column="59"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="7" Column="15"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="8" Column="23"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="12" Column="7"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="15" Column="62"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="12" Column="53"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="2" Column="27"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="12" Column="52"/>
+      </Position>
+      <Position>
+        <Filename Value="p3a.lpr"/>
+        <Caret Line="2" Column="21"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

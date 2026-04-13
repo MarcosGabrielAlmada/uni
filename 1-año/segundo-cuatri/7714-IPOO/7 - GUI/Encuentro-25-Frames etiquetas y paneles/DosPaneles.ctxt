@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=DosPaneles
+comment1.params=titulo\ b\ h
+comment1.target=DosPaneles(java.lang.String,\ int,\ int)
+numComments=2

@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=GUIResto
+comment1.params=r
+comment1.target=GUIResto(Resto)
+comment2.params=
+comment2.target=void\ inicializarpanelResto()
+comment3.params=activar
+comment3.target=void\ activarBotonesMesas(boolean)
+comment4.params=
+comment4.target=void\ inicializarPanelMenu()
+comment4.text=TODO\r\n\ Implementar\ el\ m\u00E9todo\ inicializarPanelMenu().\ Crea\ los\ botones\ correspondientes\ a\ los\ distintos\ combos\ del\ men\u00FA,\ \r\n\ registra\ sus\ oyentes\ y\ los\ inserta\ en\ el\ panel\ del\ men\u00FA.\ Adem\u00E1s,\ genera\ las\ etiquetas\ con\ las\ descripciones\ de\ cada\ combo\ y\ las\ agrega\ al\ mismo\ panel.\r\n
+comment5.params=
+comment5.target=void\ inicializarpanelMesa()
+comment6.params=
+comment6.target=void\ armarBotones()
+comment6.text=TODO\r\n\ Implementar\ los\ m\u00E9todos\ armarBotones().\ Configura\ los\ botones\ creados\ en\ el\ m\u00E9todo\ inicializarPanelMenu()\ asign\u00E1ndoles\ la\ \r\n\ informaci\u00F3n\ espec\u00EDfica\ de\ cada\ combo,\ como\ la\ imagen,\ la\ descripci\u00F3n\ y\ otros\ datos\ relevantes.\ Adem\u00E1s\ setea\ el\ actionCommando\ con\ el\r\n\ nombre\ del\ combo.\r\n
+comment7.params=
+comment7.target=void\ armarEtiquetas()
+comment7.text=TODO\r\n\ Implementar\ los\ m\u00E9todos\ armarEtiquetas().\ Configura\ las\ etiquetas\ generadas\ en\ el\ m\u00E9todo\ inicializarPanelMenu(),\ \r\n\ incorporando\ en\ cada\ una\ el\ precio\ del\ combo\ y\ la\ cantidad\ de\ unidades\ disponibles\ en\ stock.\r\n
+comment8.params=ruta\ ancho\ alto
+comment8.target=javax.swing.ImageIcon\ escalarIcono(java.lang.String,\ int,\ int)
+numComments=9

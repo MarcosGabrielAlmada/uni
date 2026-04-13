@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=ColCombos
+comment1.params=cant
+comment1.target=ColCombos(int)
+comment2.params=e
+comment2.target=void\ agregarCombo(Combo)
+comment3.params=
+comment3.target=int\ cantCombos()
+comment4.params=pos
+comment4.target=Combo\ obtenerCombo(int)
+comment5.params=n
+comment5.target=Combo\ obtenerCombo(java.lang.String)
+comment6.params=n
+comment6.target=int\ obtenerPosCombo(java.lang.String)
+comment7.params=
+comment7.target=float\ precioTotal()
+numComments=8

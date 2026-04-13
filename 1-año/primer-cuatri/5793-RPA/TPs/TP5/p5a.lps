@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="p5a.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="31" Y="16"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="4">
+      <Position>
+        <Filename Value="p5a.lpr"/>
+        <Caret Line="24" Column="32" TopLine="5"/>
+      </Position>
+      <Position>
+        <Filename Value="p5a.lpr"/>
+        <Caret Line="6" Column="14"/>
+      </Position>
+      <Position>
+        <Filename Value="p5a.lpr"/>
+        <Caret Line="11" Column="12"/>
+      </Position>
+      <Position>
+        <Filename Value="p5a.lpr"/>
+        <Caret Line="13" Column="27" TopLine="3"/>
+      </Position>
+      <Position>
+        <Filename Value="p5a.lpr"/>
+        <Caret Line="2" Column="47"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

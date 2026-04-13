@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="p10.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="10"/>
+        <CursorPos X="3" Y="13"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="5">
+      <Position>
+        <Filename Value="p10.lpr"/>
+        <Caret Line="19" Column="14" TopLine="4"/>
+      </Position>
+      <Position>
+        <Filename Value="p10.lpr"/>
+        <Caret Line="20" Column="20" TopLine="6"/>
+      </Position>
+      <Position>
+        <Filename Value="p10.lpr"/>
+        <Caret Line="19" Column="46" TopLine="17"/>
+      </Position>
+      <Position>
+        <Filename Value="p10.lpr"/>
+        <Caret Line="26" Column="16" TopLine="8"/>
+      </Position>
+      <Position>
+        <Filename Value="p10.lpr"/>
+        <Caret Line="29" Column="15" TopLine="14"/>
+      </Position>
+      <Position>
+        <Filename Value="p10.lpr"/>
+        <Caret Line="25" Column="36" TopLine="14"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

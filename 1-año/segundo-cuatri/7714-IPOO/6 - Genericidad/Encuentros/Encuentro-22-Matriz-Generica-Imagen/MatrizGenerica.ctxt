@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=MatrizGenerica
+comment1.params=f\ c
+comment1.target=MatrizGenerica(int,\ int)
+comment10.params=mat
+comment10.target=boolean\ equals(MatrizGenerica)
+comment2.params=f\ c\ e
+comment2.target=void\ establecerE(int,\ int,\ Elemento)
+comment3.params=f1\ f2
+comment3.target=void\ invertirFilas(int,\ int)
+comment4.params=f\ c
+comment4.target=boolean\ existePos(int,\ int)
+comment5.params=f\ c
+comment5.target=Elemento\ obtenerE(int,\ int)
+comment6.params=
+comment6.target=int\ cantFilas()
+comment7.params=
+comment7.target=int\ cantColumnas()
+comment8.params=
+comment8.target=boolean\ todosNeutros()
+comment9.params=
+comment9.target=MatrizGenerica\ clone()
+numComments=11

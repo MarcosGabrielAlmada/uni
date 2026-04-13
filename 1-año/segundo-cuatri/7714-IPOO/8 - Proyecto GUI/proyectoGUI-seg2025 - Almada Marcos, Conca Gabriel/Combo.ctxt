@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Combo
+comment1.params=n\ p\ c\ d
+comment1.target=Combo(java.lang.String,\ int,\ int,\ java.lang.String)
+comment2.params=
+comment2.target=void\ vender()
+comment3.params=
+comment3.target=java.lang.String\ getNombre()
+comment4.params=
+comment4.target=int\ getPrecio()
+comment5.params=
+comment5.target=int\ getCantidad()
+comment6.params=
+comment6.target=java.lang.String\ getDescripcion()
+numComments=7

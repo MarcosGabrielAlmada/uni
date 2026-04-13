@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Resto
+comment1.params=cantMesas\ stockMenu
+comment1.target=Resto(int,\ ColCombos)
+comment2.params=
+comment2.target=void\ inicializarResto()
+comment3.params=numero
+comment3.target=Mesa\ obtenerMesa(int)
+comment4.params=
+comment4.target=int\ cantMesas()
+comment5.params=
+comment5.target=ColCombos\ obtenerStockMenu()
+numComments=6

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="p2a.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="42" Y="26"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="5">
+      <Position>
+        <Filename Value="p2a.lpr"/>
+        <Caret Line="13" Column="22"/>
+      </Position>
+      <Position>
+        <Filename Value="p2a.lpr"/>
+        <Caret Line="7" Column="21" TopLine="2"/>
+      </Position>
+      <Position>
+        <Filename Value="p2a.lpr"/>
+        <Caret Line="10" Column="26"/>
+      </Position>
+      <Position>
+        <Filename Value="p2a.lpr"/>
+        <Caret Line="5" Column="3"/>
+      </Position>
+      <Position>
+        <Filename Value="p2a.lpr"/>
+        <Caret Line="23" Column="98" TopLine="20"/>
+      </Position>
+      <Position>
+        <Filename Value="p2a.lpr"/>
+        <Caret Line="26" Column="32" TopLine="14"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

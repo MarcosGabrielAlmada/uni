@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Elemento
+comment1.params=e
+comment1.target=boolean\ equals(Elemento)
+comment2.params=
+comment2.target=boolean\ esNeutro()
+comment3.params=
+comment3.target=Elemento\ clone()
+numComments=4
