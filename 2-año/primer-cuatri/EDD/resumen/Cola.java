@@ -23,14 +23,14 @@ public class Cola<E> implements Queue<E> {
     }
 	
 	public boolean isEmpty() {
-        return this.fin == this.inicio && this.arreglo[this.inicio] == null;
+        return this.fin == 0;
     }
 	
 	public E front() throws EmptyQueueException {
         if (isEmpty()) {
             throw new EmptyQueueException("Cola vacia");
         }
-        return this.arreglo[inicio];
+        return this.arreglo[fin-1];
 
     }
 	
@@ -43,19 +43,19 @@ public class Cola<E> implements Queue<E> {
                 for (int i = 0; i < this.arreglo.length; i++) {
                     aux[i] = this.arreglo[i];
                 }
+                this.inicio += 10;
                 this.arreglo = aux;
             }
         } else if (this.fin == this.inicio && this.arreglo[this.fin] != null) {
             E[] aux = (E[]) new Object[this.arreglo.length + 10];
             for (int i = 0; i < this.arreglo.length; i++) {
-                if (i >= this.inicio) {
-                    aux[i - this.inicio] = this.arreglo[i];
+                if (i < this.inicio) {
+                    aux[i] = this.arreglo[i];
                 } else {
-                    aux[i + this.arreglo.length - this.inicio] = this.arreglo[i];
+                    aux[i + 10] = this.arreglo[i];
                 }
             }
-            this.inicio = 0;
-            this.fin = this.arreglo.length;
+            this.inicio += 10;
             this.arreglo = aux;
         }
         this.arreglo[this.fin++] = element;
@@ -67,17 +67,17 @@ public class Cola<E> implements Queue<E> {
             throw new EmptyQueueException("Cola vacia");
         }
 
-        E valor = this.arreglo[this.inicio];
+        E aux = this.arreglo[this.inicio];
         this.arreglo[this.inicio++] = null;
         
         if (this.inicio == this.arreglo.length) {
             this.inicio = 0;
         }
 
-        // else if (this.inicio == this.fin) {
-        //     this.inicio = 0;
-        //     this.fin = 0;
-        // }
-        return valor;
+        else if (this.inicio == this.fin) {
+            this.inicio = 0;
+            this.fin = 0;
+        }
+        return aux;
     }
 }
