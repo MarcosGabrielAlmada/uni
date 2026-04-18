@@ -1,7 +1,5 @@
-package ar.edu.uns.cs.ed.tdas.tps.tp3;
-
-import ar.edu.uns.cs.ed.tdas.tdapila.Stack;
-import ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;
+import excepciones.EmptyStackException;
+import tda.Stack;
 
 public class Pila<E> implements Stack<E>{
     private E[] arreglo;

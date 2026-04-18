@@ -74,10 +74,10 @@ public class Cola<E> implements Queue<E> {
             this.inicio = 0;
         }
 
-        // else if (this.inicio == this.fin) {
-        //     this.inicio = 0;
-        //     this.fin = 0;
-        // }
+        else if (this.inicio == this.fin) {
+            this.inicio = 0;
+            this.fin = 0;
+        }
         return valor;
     }
 }
