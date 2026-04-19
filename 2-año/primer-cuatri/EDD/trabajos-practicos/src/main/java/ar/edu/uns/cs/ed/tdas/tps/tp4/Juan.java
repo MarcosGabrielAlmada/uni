@@ -9,7 +9,7 @@ import java.util.*;
 
 import org.junit.*;
 
-public class ListTest {
+public class Juan {
 	private PositionList<String> l; // interface
 	private String n1, n2, n3, n4, n5, n6;
 
@@ -19,7 +19,7 @@ public class ListTest {
 
 	private PositionList<String> getList() {
 		PositionList<String> lista = null;
-		lista = new ListaDEC<String>(); //TODO: Descomentar y crear instancia del TDA a testear
+		lista = new ListaDobleEnlazadaCentinelaJuan<String>(); //TODO: Descomentar y crear instancia del TDA a testear
 		return lista;
 	}
 

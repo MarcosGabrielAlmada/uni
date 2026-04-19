@@ -6,11 +6,11 @@ import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
 import ar.edu.uns.cs.ed.tdas.Position;
 import java.util.Iterator;
 
-public class ListaDoblementeEnlazada<E> implements PositionList<E> {
+public class ListaDEC<E> implements PositionList<E> {
     protected DNodo<E> head, tail;
     protected int tamaño;
 
-    public ListaDoblementeEnlazada() {
+    public ListaDEC() {
         this.head = new DNodo<E>(null);
         this.tail = new DNodo<E>(null, this.head, null);
         this.head.setSiguiente(this.tail);
@@ -91,18 +91,12 @@ public class ListaDoblementeEnlazada<E> implements PositionList<E> {
     }
 
     public E remove(Position<E> p) {
-        if (isEmpty()) {
-            throw new InvalidPositionException("ista vacia");
-        }
         DNodo<E> nodo = this.checkPosition(p);
 
-        if (p == first()) {
-            this.head = nodo.getSiguiente();
-        } else {
-            nodo.getPrevio().setSiguiente(nodo.getSiguiente());
-            nodo.getSiguiente().setPrevio(nodo.getPrevio());
-        }
-        
+        nodo.getPrevio().setSiguiente(nodo.getSiguiente());
+        nodo.getSiguiente().setPrevio(nodo.getPrevio());
+        nodo.setElemento(null);
+
         this.tamaño--;
 
         return nodo.element();
@@ -120,14 +114,14 @@ public class ListaDoblementeEnlazada<E> implements PositionList<E> {
     }
 
     public Iterable<Position<E>> positions() {
-        ListaDoblementeEnlazada<Position<E>> lista = new ListaDoblementeEnlazada<Position<E>>();        
+        ListaDEC<Position<E>> lista = new ListaDEC<Position<E>>();
         DNodo<E> nodo = this.head.getSiguiente();
 
         while (nodo != this.tail) {
             lista.addLast(nodo);
             nodo = nodo.getSiguiente();
         }
-        
+
         return lista;
     }
 
@@ -141,5 +135,15 @@ public class ListaDoblementeEnlazada<E> implements PositionList<E> {
         } catch (ClassCastException e) {
             throw new InvalidPositionException("p no es un nodo de la lista");
         }
+    }
+
+    public String toString() {
+        String res = "";
+        DNodo<E> cursor = this.head.getSiguiente();
+        while(cursor != this.tail) {
+            res = res + "[" + cursor.getElemento() + "]";
+            cursor = cursor.getSiguiente();
+        }
+        return res;
     }
 }

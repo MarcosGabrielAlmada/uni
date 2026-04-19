@@ -5,11 +5,11 @@ import tda.PositionList;
 import tda.Position;
 import java.util.Iterator;
 
-public class ListaEnlazada<E> implements PositionList<E> {
+public class ListaSE<E> implements PositionList<E> {
     protected Nodo<E> head;
     protected int tamaño;
 
-    public ListaEnlazada() {
+    public ListaSE() {
         this.head = null;
         this.tamaño = 0;
     }
