@@ -4,7 +4,6 @@ import excepciones.InvalidPositionException;
 import tda.PositionList;
 import tda.Position;
 import java.util.Iterator;
-
 public class ListaDEC<E> implements PositionList<E> {
     protected DNodo<E> head, tail;
     protected int tamaño;
@@ -94,6 +93,7 @@ public class ListaDEC<E> implements PositionList<E> {
 
         nodo.getPrevio().setSiguiente(nodo.getSiguiente());
         nodo.getSiguiente().setPrevio(nodo.getPrevio());
+        nodo.setElemento(null);
 
         this.tamaño--;
 
