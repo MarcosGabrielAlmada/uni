@@ -1,10 +1,11 @@
 package ar.edu.uns.cs.ed.tdas.tps.tp4;
+import java.util.Iterator;
+
+import ar.edu.uns.cs.ed.tdas.Position;
 import ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
-import ar.edu.uns.cs.ed.tdas.Position;
-import java.util.Iterator;
 
 public class ListaDEC<E> implements PositionList<E> {
     protected DNodo<E> head, tail;
@@ -145,5 +146,15 @@ public class ListaDEC<E> implements PositionList<E> {
             cursor = cursor.getSiguiente();
         }
         return res;
+    }
+
+    public void ejercicio2 (E e1, E e2) {
+        if (isEmpty()) {
+            this.addFirst(e1);
+            this.addFirst(e2);
+        } else {
+            this.addAfter(this.first(), e1);
+            this.addBefore(this.last(), e2);
+        }
     }
 }
