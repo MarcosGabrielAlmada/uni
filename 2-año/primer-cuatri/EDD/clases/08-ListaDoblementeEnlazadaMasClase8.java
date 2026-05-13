@@ -30,6 +30,33 @@ public class ListaDoblementeEnlazadaMasClase8<E> extends ListaDoblementeEnlazada
 		}
 		return resultado;
 	}
+	// Sabiendo que la lista tiene un tamaño
+	// fijo, puedo iterar con un for.
+	private ListaDoblementeEnlazada<E> cloneAuxV3() {
+		ListaDoblementeEnlazada<E> resultado = new ListaDoblementeEnlazada<E>();
+		int largo = tamaño;
+		DNode<E> p = header.getSiguiente();
+		for(int i = 0; i < largo; i++) {
+			resultado.addLast(p.element());
+			p = p.getSiguiente();
+		}
+		return resultado;
+	}
+	
+	// Esto clona los elementos tambien:
+	// E extends Clonable: genericidad restringida
+	private ListaDoblementeEnlazada<E extends Clonable> cloneAuxV3() {
+		ListaDoblementeEnlazada<E> resultado = new ListaDoblementeEnlazada<E>();
+		int largo = tamaño;
+		DNode<E> p = header.getSiguiente();
+		for(int i = 0; i < largo; i++) {
+			resultado.addLast(p.element().clone());
+			p = p.getSiguiente();
+		}
+		return resultado;
+	}
+	
+	
 	
 	public void ejercicio6(E item) {
 		if (isEmpty()) return;

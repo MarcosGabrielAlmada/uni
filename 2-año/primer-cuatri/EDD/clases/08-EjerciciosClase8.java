@@ -106,13 +106,45 @@ public class EjerciciosClase8 {
 		return contador;
 	}
 	
+	public <E> int cantidadApariciones(E elemento, PositionList<E> lista) {
+		int contador = 0;
+		if ( !lista.isEmpty() ) {
+			Position<E> p = lista.first();
+			while ( p != lista.last() ) {
+				E elemento_lista = p.element();
+				if (elemento_lista.equals(elemento)) contador++;
+				p = lista.next(p);
+			}
+			if (p.element().equals(elemento)) contador++;
+		}
+		return contador;
+	}
+	
+	
 	public <E> int cantidadAparicionesBis(E elemento, PositionList<E> lista) {
 		int contador = 0;
 		if (lista.isEmpty() == false) {
+			Position<E> ultima = lista.last();
 			Position<E> p = lista.first();
 			while ( p != null ) {
 				if (p.element().equals(elemento)) contador++;
-				p = p != lista.last() ? lista.next(p) : null;
+				// p = p != lista.last() ? lista.next(p) : null;
+				p = p == ultima ? null : lista.next(p);
+			}
+		}
+		return contador;
+	}
+	
+	public <E> int cantidadAparicionesBis(E elemento, PositionList<E> lista) {
+		int contador = 0;
+		if (lista.isEmpty() == false) {
+			Position<E> ultima = lista.last();
+			Position<E> p = lista.first();
+			boolean seguir = true;
+			while ( seguir ) {
+				if ( p.element().equals(elemento) ) contador++;
+				if ( p == ultima ) seguir = false;
+				else p = lista.next(p);
 			}
 		}
 		return contador;
@@ -127,22 +159,30 @@ public class EjerciciosClase8 {
 	}
 	
 	
+	// Si me dejan usar el iterador:
+	public <E> int cantidadAparicionesBisBis(E elemento, PositionList<E> lista) {
+		int contador = 0;
+		for ( Position<E> p : lista.positions()) 
+			if (p.element().equals(elemento)) contador++;
+		return contador;
+	}
+	
 	public <E> boolean ejercicio2(E elemento, PositionList<E> lista) {
 		return aparece(elemento, lista);
 	}
 	
 	// Ineficiente porque recorre la lista exhaustivamente:
 	public <E> boolean aparece(E elemento, PositionList<E> lista) {
-		return cantidadApariciones(elemento, lista) == 0;
+		return cantidadApariciones(elemento, lista) != 0;
 	}
 	
 	public <E> boolean apareceBis(E elemento, PositionList<E> lista) {
 		boolean encontrado = false;
-		if (lista.isEmpty()) {
+		if ( !lista.isEmpty() ) {
 			Position<E> p = lista.first();
-			while ( p != null && encontrado == false) {
+			while ( p != null && !encontrado) {
 				if (p.element().equals(elemento)) encontrado = true;
-				p = p != lista.last() ? lista.next(p) : null;
+				else p = p == lista.last() ? null : lista.next(p);
 			}
 		}
 		return encontrado;
@@ -161,12 +201,49 @@ public class EjerciciosClase8 {
 		Iterator<E> it = lista.iterator();
 		while (it.hasNext() && resultado == false) {
 			E item = it.next();
-			if (item.equals(elemento)) resultado = true;
+			resultado = item.equals(elemento);
 		}
 		return resultado;
 	}
 
-	public <E> boolean ejercicio2(PositionList<E> lista1, PositionList<E> lista2) {
+
+// Si me dejan usar el iterador.
+	public <E> boolean apareceBisBisBis(E elemento, PositionList<E> lista) {;
+		boolean resultado = false;
+		Iterator<E> it = lista.iterator();
+		while (it.hasNext() && resultado == false) {
+			resultado = it.next().equals(elemento);
+		}
+		return resultado;
+	}
+	
+	// Si me dejan usar el iterador.
+	// Este es una exageracion pero funciona porque && usa
+	// short-circuit evaluation
+	public <E> boolean apareceBisBisBis(E elemento, PositionList<E> lista) {;
+		boolean resultado = false;
+		Iterator<E> it = lista.iterator();
+		while (it.hasNext() && !(resultado = it.next().equals(elemento))) {
+		}
+		return resultado;
+	}
+	
+		
+	
+	
+// Si me dejan usar el iterador.
+	public <E> boolean apareceBisBisBis(E elemento, PositionList<E> lista) {;
+		boolean encontre = false;
+		Iterator<E> it = lista.iterator();
+		while (it.hasNext() && !encontre) {
+			E item = it.next();
+			if (item.equals(elemento)) encontre = true;
+		}
+		return encontre;
+	}
+
+
+	public <E> boolean ejercicio3(PositionList<E> lista1, PositionList<E> lista2) {
 		return sonIguales(lista1, lista2);
 	}
 	
@@ -178,6 +255,7 @@ public class EjerciciosClase8 {
 		boolean resultado = true;
 		Position<E> p1 = lista1.first();
 		Position<E> p2 = lista2.first();
+		// La condicion p2 != null es innecesaria:
 		while (p1 != null && p2 != null && resultado == true) {
 			E item1 = p1.element();
 			E item2 = p2.element();
@@ -190,13 +268,62 @@ public class EjerciciosClase8 {
 		return resultado;
 	}
 	
-	public <E> boolean ejercicio3(PositionList<E> lista1, PositionList<E> lista2) {
+	public <E> boolean sonIguales(PositionList<E> lista1, PositionList<E> lista2) {
+		if (lista1.size() != lista2.size()) return false;
+		if (lista1.isEmpty() && lista2.isEmpty() ) return true;
+		
+		// Tienen el mismo tamaño y no son vacias
+		boolean resultado = true;
+		Position<E> p1 = lista1.first();
+		Position<E> p2 = lista2.first();
+		// La condicion p2 != null es innecesaria:
+		while (p1 != null && p2 != null && resultado == true) {
+			E item1 = p1.element();
+			E item2 = p2.element();
+			resultado = !item1.equals(item2);
+			p1 = (p1 == lista1.last()) ? null : lista1.next(p1);
+			p2 = (p2 == lista2.last()) ? null : lista2.next(p2);
+		}
+		return resultado;
+	}
+	
+	public <E> boolean sonIguales(PositionList<E> lista1, PositionList<E> lista2) {
+		if (lista1.size() != lista2.size()) return false;
+		if (lista1.isEmpty() && lista2.isEmpty() ) return true;
+		
+		// Tienen el mismo tamaño y no son vacias
+		Iterator<E> it2 = lista2.iterator();
+		for (E item1 : lista1) {
+			E item2 = it2.next();
+			if( !item1.equals(item2) ) return false;
+		}
+		return true;
+	}
+	
+	// Alguien comento que mezcla niveles de abstraccion y por no le
+	// resulta estetico. Es un argumento valido.
+	public <E> boolean sonIguales(PositionList<E> lista1, PositionList<E> lista2) {
+		if (lista1.size() != lista2.size()) return false;
+		if (lista1.isEmpty() && lista2.isEmpty() ) return true;
+		
+		// Tienen el mismo tamaño y no son vacias
+		Iterator<E> it2 = lista2.iterator();
+		for (E item1 : lista1) {
+			if( !item1.equals(it2.next()) ) return false;
+		}
+		return true;
+	}
+	
+	
+	public <E> boolean ejercicio4(PositionList<E> lista1, PositionList<E> lista2) {
 		return estaIncluida(lista1, lista2);
 	}
 	
+	// Computa si lista1 está incluida en lista2:
 	public <E>  boolean estaIncluida(PositionList<E> lista1, PositionList<E> lista2) {
 		if (lista1.isEmpty()) return true;
 		if (lista2.isEmpty()) return false;
+		if (lista1.size() > lista2.size()) return false;
 		
 		Position<E> p2 = lista2.first();
 		boolean encontre = false;
