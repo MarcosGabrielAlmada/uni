@@ -114,7 +114,6 @@ public class ListaDEC<E> implements PositionList<E> {
     public Iterable<Position<E>> positions() {
         ListaDEC<Position<E>> lista = new ListaDEC<Position<E>>();
         DNodo<E> nodo = this.head.getSiguiente();
-
         while (nodo != this.tail) {
             lista.addLast(nodo);
             nodo = nodo.getSiguiente();

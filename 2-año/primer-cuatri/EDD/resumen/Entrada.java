@@ -12,6 +12,7 @@ public class Entrada<K,V> implements Entry<K,V> {
     public K getKey() {
         return this.key;
     }
+    
     public V getValue() {
         return this.value;
     }
