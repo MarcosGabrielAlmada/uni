@@ -1,10 +1,12 @@
-import tda.Map;
+package ar.edu.uns.cs.ed.tdas.tps.tp5;
 
-import excepciones.InvalidKeyException;
+import ar.edu.uns.cs.ed.tdas.tdamapeo.Map;
 
-import tda.Entry;
-import tda.Position;
-import tda.PositionList;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
+
+import ar.edu.uns.cs.ed.tdas.Entry;
+import ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.tps.tp4.ListaDEC;
 
 public class HashMap<K,V> implements Map<K,V> {
     private final float LIMITE_FACTOR_CARGA = 0.75f;
@@ -12,10 +14,13 @@ public class HashMap<K,V> implements Map<K,V> {
     private int cant;
     private float factorDeCarga;
 
-    public HashMap(int tam) {
-        this.bucket = new ListaDEC[tam];
+    public HashMap() {
+        this.bucket = new ListaDEC[13];
+        for (int i = 0; i < this.bucket.length; i++) {
+            this.bucket[i] = new ListaDEC<Entrada<K,V>>();
+        }
         this.factorDeCarga = 0;
-        this.cant = 0;
+        this.cant = 13;
     }
 
     public int size() {
@@ -119,8 +124,10 @@ public class HashMap<K,V> implements Map<K,V> {
                     esPrimo = false;
                 }
             }
-            esPrimo = true;
-            i++;
+            if (!esPrimo) {
+                esPrimo = true;
+                i++;
+            }
         }
         return i;
     }
@@ -131,11 +138,14 @@ public class HashMap<K,V> implements Map<K,V> {
 
     private void rehash() {
         ListaDEC<Entrada<K,V>>[] nuevo = new ListaDEC[this.proximoPrimo(this.bucket.length*2)];
+
+        for (int i = 0; i < nuevo.length; i++) {
+            nuevo[i] = new ListaDEC<Entrada<K,V>>();
+        }
+
         for (int i = 0; i < this.bucket.length; i++) {
-            if (this.bucket[i] != null) {
-                for (Entrada<K,V> e : this.bucket[i]) {
-                    nuevo[this.hash(e.getKey())].addLast(e);
-                }
+            for (Entrada<K,V> e : this.bucket[i]) {
+                nuevo[this.hash(e.getKey())].addLast(e);
             }
         }
         this.bucket = nuevo;
@@ -144,10 +154,8 @@ public class HashMap<K,V> implements Map<K,V> {
 	public Iterable<K> keys() {
         ListaDEC<K> lista = new ListaDEC<K>();
         for (int i = 0; i < this.size(); i++) {
-            if (this.bucket[i] != null) {
-                for (Entry<K,V> e : this.bucket[i]) {
-                    lista.addLast(e.getKey());
-                }
+            for (Entry<K,V> e : this.bucket[i]) {
+                lista.addLast(e.getKey());
             }
         }
         return lista;
@@ -156,10 +164,8 @@ public class HashMap<K,V> implements Map<K,V> {
 	public Iterable<V> values() {
         ListaDEC<V> lista = new ListaDEC<V>();
         for (int i = 0; i < this.size(); i++) {
-            if (this.bucket[i] != null) {
-                for (Entry<K,V> e : this.bucket[i]) {
-                    lista.addLast(e.getValue());
-                }
+            for (Entry<K,V> e : this.bucket[i]) {
+                lista.addLast(e.getValue());
             }
         }
         return lista;
@@ -168,10 +174,8 @@ public class HashMap<K,V> implements Map<K,V> {
 	public Iterable<Entry<K,V>> entries() {
         ListaDEC<Entry<K,V>> lista = new ListaDEC<Entry<K,V>>();
         for (int i = 0; i < this.size(); i++) {
-            if (this.bucket[i] != null) {
-                for (Entry<K,V> e : this.bucket[i]) {
-                    lista.addLast(e);
-                }
+            for (Entry<K,V> e : this.bucket[i]) {
+                lista.addLast(e);
             }
         }
         return lista;
