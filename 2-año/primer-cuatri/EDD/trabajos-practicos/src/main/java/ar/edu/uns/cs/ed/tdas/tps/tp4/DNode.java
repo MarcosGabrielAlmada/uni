@@ -1,17 +1,17 @@
 package ar.edu.uns.cs.ed.tdas.tps.tp4;
 import ar.edu.uns.cs.ed.tdas.Position;
 
-public class DNodo<E> implements Position<E> {
+public class DNode<E> implements Position<E> {
     private E elemento;
-    private DNodo<E> previo, siguiente;
+    private DNode<E> previo, siguiente;
 
-    public DNodo(E item, DNodo<E> prev, DNodo<E> sig) {
+    public DNode(E item, DNode<E> prev, DNode<E> sig) {
         this.elemento = item;
         this.previo = prev;
         this.siguiente = sig;
     }
 
-    public DNodo(E item) {
+    public DNode(E item) {
         this(item, null, null);
     }
 
@@ -19,11 +19,11 @@ public class DNodo<E> implements Position<E> {
         this.elemento = elemento;
     }
 
-    public void setPrevio(DNodo<E> previo) {
+    public void setPrevio(DNode<E> previo) {
         this.previo = previo;
     }
 
-    public void setSiguiente(DNodo<E> siguiente) {
+    public void setSiguiente(DNode<E> siguiente) {
         this.siguiente = siguiente;
     }
 
@@ -31,11 +31,11 @@ public class DNodo<E> implements Position<E> {
         return this.elemento;
     }
 
-    public DNodo<E> getPrevio() {
+    public DNode<E> getPrevio() {
         return this.previo;
     }
 
-    public DNodo<E> getSiguiente() {
+    public DNode<E> getSiguiente() {
         return this.siguiente;
     }
 

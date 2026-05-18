@@ -44,7 +44,7 @@ public class Ejercicios {
     // EJERCICIO 4
 
     public <E> PositionList<E> e4(PositionList<E> l) {
-        PositionList<E> nuevaList = new ListaDEC<E>();
+        PositionList<E> nuevaList = new ListDEC<E>();
         for (E item : l) {
             nuevaList.addLast(item);
             nuevaList.addLast(item);

@@ -3,21 +3,21 @@ package ar.edu.uns.cs.ed.tdas.tps.tp5;
 import ar.edu.uns.cs.ed.tdas.tdadiccionario.Dictionary;
 import ar.edu.uns.cs.ed.tdas.Entry;
 import ar.edu.uns.cs.ed.tdas.Position;
-import ar.edu.uns.cs.ed.tdas.tps.tp4.ListaDEC;
+import ar.edu.uns.cs.ed.tdas.tps.tp4.ListDEC;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidEntryException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
 
 public class Diccionario<K,V> implements Dictionary<K,V> {
     private final float LIMITE_FACTOR_CARGA = 0.75f;
-    private ListaDEC<Entrada<K,V>>[] bucket;
+    private ListDEC<Entrada<K,V>>[] bucket;
     private int cant;
     private float factorDeCarga;
 
 
     public Diccionario() {
-        this.bucket = new ListaDEC[13];
+        this.bucket = new ListDEC[13];
 		for (int i = 0; i < this.bucket.length; i++) {
-			this.bucket[i] = new ListaDEC<Entrada<K,V>>();
+			this.bucket[i] = new ListDEC<Entrada<K,V>>();
 		}
 		this.factorDeCarga = 0;
         this.cant = 13;
@@ -69,7 +69,7 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
         if (key == null)
             throw new InvalidKeyException("Clave nula");
 
-        ListaDEC<Entry<K,V>> all = new ListaDEC<Entry<K,V>>();
+        ListDEC<Entry<K,V>> all = new ListDEC<Entry<K,V>>();
 		for (int i = 0; i < this.bucket.length; i++) {
 			for (Entrada<K,V> e : this.bucket[i]) {
 				if (e.getKey() == key) {
@@ -115,7 +115,7 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 		if (e == null)
 			throw new InvalidEntryException("Entrada nula");
 
-		ListaDEC<Entrada<K,V>> lista = this.bucket[this.hash(e.getKey())];
+		ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(e.getKey())];
 		for (Position<Entrada<K,V>> p : lista.positions()) {
 			if (e == p.element()) {
 				lista.remove(p);
@@ -132,10 +132,10 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 	}
 
 	public void rehash() {
-		ListaDEC<Entrada<K,V>>[] nuevo = new ListaDEC[this.proximoPrimo(this.bucket.length*2)];
+		ListDEC<Entrada<K,V>>[] nuevo = new ListDEC[this.proximoPrimo(this.bucket.length*2)];
 
         for (int i = 0; i < nuevo.length; i++) {
-            nuevo[i] = new ListaDEC<Entrada<K,V>>();
+            nuevo[i] = new ListDEC<Entrada<K,V>>();
         }
 
 		for (int i = 0; i < this.bucket.length; i++) {
@@ -167,7 +167,7 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 	 * @return Colección iterable de todas las entradas.
 	 */
 	public Iterable<Entry<K,V>> entries() {
-		ListaDEC<Entry<K,V>> lista = new ListaDEC<Entry<K,V>>();
+		ListDEC<Entry<K,V>> lista = new ListDEC<Entry<K,V>>();
 
 		for (int i = 0; i < this.bucket.length; i++) {
 			for (Entry<K,V> e : this.bucket[i]) {

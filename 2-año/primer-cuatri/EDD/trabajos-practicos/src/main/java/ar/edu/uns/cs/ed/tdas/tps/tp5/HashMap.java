@@ -6,18 +6,18 @@ import ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
 
 import ar.edu.uns.cs.ed.tdas.Entry;
 import ar.edu.uns.cs.ed.tdas.Position;
-import ar.edu.uns.cs.ed.tdas.tps.tp4.ListaDEC;
+import ar.edu.uns.cs.ed.tdas.tps.tp4.ListDEC;
 
 public class HashMap<K,V> implements Map<K,V> {
     private final float LIMITE_FACTOR_CARGA = 0.75f;
-    private ListaDEC<Entrada<K,V>>[] bucket;
+    private ListDEC<Entrada<K,V>>[] bucket;
     private int cant;
     private float factorDeCarga;
 
     public HashMap() {
-        this.bucket = new ListaDEC[13];
+        this.bucket = new ListDEC[13];
         for (int i = 0; i < this.bucket.length; i++) {
-            this.bucket[i] = new ListaDEC<Entrada<K,V>>();
+            this.bucket[i] = new ListDEC<Entrada<K,V>>();
         }
         this.factorDeCarga = 0;
         this.cant = 13;
@@ -34,7 +34,7 @@ public class HashMap<K,V> implements Map<K,V> {
 	public V get(K key) {
         if (key == null)
             throw new InvalidKeyException("Clave nula");
-        ListaDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
+        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
         for (Entrada<K,V> e : lista) {
             if (e.getKey() == key) {
                 return e.getValue();
@@ -53,7 +53,7 @@ public class HashMap<K,V> implements Map<K,V> {
         if (key == null)
             throw new InvalidKeyException("Clave nula");
 
-        ListaDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
+        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
         for (Entrada<K,V> e : lista) {
             if (e.getKey() == key) {
                 V aux = e.getValue();
@@ -76,7 +76,7 @@ public class HashMap<K,V> implements Map<K,V> {
         if (key == null)
             throw new InvalidKeyException("Clave nula");
 
-        ListaDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
+        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
         for (Position<Entrada<K,V>> p : lista.positions()) {
             if (p.element().getKey() == key) {
                 V aux = p.element().getValue();
@@ -137,10 +137,10 @@ public class HashMap<K,V> implements Map<K,V> {
     }
 
     private void rehash() {
-        ListaDEC<Entrada<K,V>>[] nuevo = new ListaDEC[this.proximoPrimo(this.bucket.length*2)];
+        ListDEC<Entrada<K,V>>[] nuevo = new ListDEC[this.proximoPrimo(this.bucket.length*2)];
 
         for (int i = 0; i < nuevo.length; i++) {
-            nuevo[i] = new ListaDEC<Entrada<K,V>>();
+            nuevo[i] = new ListDEC<Entrada<K,V>>();
         }
 
         for (int i = 0; i < this.bucket.length; i++) {
@@ -152,7 +152,7 @@ public class HashMap<K,V> implements Map<K,V> {
     }
 
 	public Iterable<K> keys() {
-        ListaDEC<K> lista = new ListaDEC<K>();
+        ListDEC<K> lista = new ListDEC<K>();
         for (int i = 0; i < this.size(); i++) {
             for (Entry<K,V> e : this.bucket[i]) {
                 lista.addLast(e.getKey());
@@ -162,7 +162,7 @@ public class HashMap<K,V> implements Map<K,V> {
     }
 
 	public Iterable<V> values() {
-        ListaDEC<V> lista = new ListaDEC<V>();
+        ListDEC<V> lista = new ListDEC<V>();
         for (int i = 0; i < this.size(); i++) {
             for (Entry<K,V> e : this.bucket[i]) {
                 lista.addLast(e.getValue());
@@ -172,7 +172,7 @@ public class HashMap<K,V> implements Map<K,V> {
     }
 
 	public Iterable<Entry<K,V>> entries() {
-        ListaDEC<Entry<K,V>> lista = new ListaDEC<Entry<K,V>>();
+        ListDEC<Entry<K,V>> lista = new ListDEC<Entry<K,V>>();
         for (int i = 0; i < this.size(); i++) {
             for (Entry<K,V> e : this.bucket[i]) {
                 lista.addLast(e);

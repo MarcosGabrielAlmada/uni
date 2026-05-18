@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 public class testerEjercicio4 {
     public static void main(String[] args) {
-        ListaDEC<String> lista = new ListaDEC<>();
+        ListDEC<String> lista = new ListDEC<>();
         lista.addFirst("1");
         lista.addFirst("2");
         lista.addFirst("3");

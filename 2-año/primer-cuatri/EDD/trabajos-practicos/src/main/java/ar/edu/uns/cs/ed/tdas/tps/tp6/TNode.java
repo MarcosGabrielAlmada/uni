@@ -2,17 +2,17 @@ package ar.edu.uns.cs.ed.tdas.tps.tp6;
 
 import ar.edu.uns.cs.ed.tdas.Position;
 import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
-import ar.edu.uns.cs.ed.tdas.tps.tp4.ListaDEC;
+import ar.edu.uns.cs.ed.tdas.tps.tp4.ListDEC;
 
-public class TNodo<E> implements Position<E>{
+public class TNode<E> implements Position<E>{
 	private E element;
 	private Position<E> father;
-	private ListaDEC<TNodo<E>> childrens;
+	private ListDEC<TNode<E>> childrens;
 
-	public TNodo(E elem, Position<E> father) {
+	public TNode(E elem, Position<E> father) {
 		this.element = elem;
 		this.father = father;
-		this.childrens = new ListaDEC<TNodo<E>>();
+		this.childrens = new ListDEC<TNode<E>>();
 	}
 
 	public E element() {
@@ -23,7 +23,7 @@ public class TNodo<E> implements Position<E>{
 		return this.father;
 	}
 
-	public PositionList<TNodo<E>> getChildrens() {
+	public PositionList<TNode<E>> getChildrens() {
 		return this.childrens;
 	}
 
@@ -34,8 +34,4 @@ public class TNodo<E> implements Position<E>{
 	public void setFather(Position<E> father) {
 		this.father = father;
 	}
-
-	// public void setChildrens(PositionList<TNodo<E>> sons) {
-	// 	this.childrens = sons;
-	// }
 }

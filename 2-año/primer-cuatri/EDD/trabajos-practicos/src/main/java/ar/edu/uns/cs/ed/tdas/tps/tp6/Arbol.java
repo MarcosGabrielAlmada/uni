@@ -7,14 +7,14 @@ import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 import ar.edu.uns.cs.ed.tdas.tdaarbol.Tree;
 import ar.edu.uns.cs.ed.tdas.Position;
 import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
-import ar.edu.uns.cs.ed.tdas.tps.tp4.DNodo;
-import ar.edu.uns.cs.ed.tdas.tps.tp4.ListaDEC;
+import ar.edu.uns.cs.ed.tdas.tps.tp4.ListDEC;
+import java.util.Iterator;
 
-public class ArbolGeneral<E> implements Tree<E> {
-	private TNodo<E> root;
+public class Arbol<E> implements Tree<E> {
+	private TNode<E> root;
 	private int size;
 
-	public ArbolGeneral() {
+	public Arbol() {
 		this.root = null;
 		this.size = 0;
 	}
@@ -39,8 +39,26 @@ public class ArbolGeneral<E> implements Tree<E> {
 	 * Devuelve un iterador de los elementos almacenados en el árbol en preorden.
 	 * @return Iterador de los elementos almacenados en el árbol.
 	 */
-	public Iterator<E> iterator() { // TODO
-		return new ElementIterator<E>(pre()???);
+	public Iterator<E> iterator() {
+		PositionList<E> lista = new ListDEC<E>();
+		for (Position<E> p : this.positions()) {
+			lista.addLast(p.element());
+		}
+		return lista.iterator();
+	}
+
+	private void preOrden(TNode<E> nodo, PositionList<Position<E>> lista) {
+		lista.addLast(nodo);
+		for (TNode<E> n : nodo.getChildrens()) {
+			this.preOrden(n, lista);
+		} 
+	}
+
+	private void postOrden(TNode<E> nodo, PositionList<Position<E>> lista) {
+		for (TNode<E> n : nodo.getChildrens()) {
+			this.postOrden(n, lista);
+		} 
+		lista.addLast(nodo);
 	}
 	
 	/**
@@ -48,7 +66,9 @@ public class ArbolGeneral<E> implements Tree<E> {
 	 * @return Colección iterable de las posiciones de los nodos del árbol.
 	 */
 	public Iterable<Position<E>> positions() {
-		return null;
+		PositionList<Position<E>> lista = new ListDEC<Position<E>>();
+		if (!this.isEmpty()) { this.preOrden(this.root, lista); }
+		return lista;
 	}
 	
 	/**
@@ -59,7 +79,7 @@ public class ArbolGeneral<E> implements Tree<E> {
 	 * @throws InvalidPositionException si la posición pasada por parámetro es inválida.
 	 */
 	public E replace(Position<E> v, E e) {
-		TNodo<E> nodo = this.checkPosition(v);
+		TNode<E> nodo = this.checkPosition(v);
 		E aux = nodo.element();
 		nodo.setElement(e);
 		return aux;
@@ -97,8 +117,13 @@ public class ArbolGeneral<E> implements Tree<E> {
 	 * @return Colección iterable de los hijos del nodo correspondiente a la posición pasada por parámetro.
 	 * @throws InvalidPositionException si la posición pasada por parámetro es inválida.
 	 */
-	public Iterable<Position<E>> children(Position<E> v) { // TODO
-		return null;
+	public Iterable<Position<E>> children(Position<E> v) {
+		TNode<E> nodo = this.checkPosition(v);
+		PositionList<Position<E>> lista = new ListDEC<>();
+		for (Position<E> p : nodo.getChildrens()) {
+			lista.addLast(p);
+		}
+		return lista;
 	}
 	
 	/**
@@ -139,7 +164,7 @@ public class ArbolGeneral<E> implements Tree<E> {
 	public void createRoot(E e) {
 		if (this.root != null)
 			throw new InvalidOperationException("El arbol ya tiene una Root");
-		this.root = new TNodo<E>(e, null);
+		this.root = new TNode<E>(e, null);
 		this.size++;
 	}
 	
@@ -151,8 +176,11 @@ public class ArbolGeneral<E> implements Tree<E> {
 	 * @throws InvalidPositionException si la posición pasada por parámetro es inválida o el árbol está vacío.
 	 */
 	public Position<E> addFirstChild(Position<E> p, E e) {
-		TNodo<E> nodo = this.checkPosition(p);
-		TNodo<E> nuevo = new TNodo<E>(e, p);
+		if (this.isEmpty())
+			throw new InvalidPositionException("Arbol vacio");
+		
+		TNode<E> nodo = this.checkPosition(p);
+		TNode<E> nuevo = new TNode<E>(e, p);
 		nodo.getChildrens().addFirst(nuevo);
 		this.size++;
 		return nuevo;
@@ -166,8 +194,11 @@ public class ArbolGeneral<E> implements Tree<E> {
 	 * @throws InvalidPositionException si la posición pasada por parámetro es inválida o el árbol está vacío.
 	 */
 	public Position<E> addLastChild(Position<E> p, E e) {
-		TNodo<E> nodo = this.checkPosition(p);
-		TNodo<E> nuevo = new TNodo<E>(e, p);
+		if (this.isEmpty())
+			throw new InvalidPositionException("Arbol vacio");
+		
+		TNode<E> nodo = this.checkPosition(p);
+		TNode<E> nuevo = new TNode<E>(e, p);
 		nodo.getChildrens().addLast(nuevo);
 		this.size++;
 		return nuevo;
@@ -182,14 +213,17 @@ public class ArbolGeneral<E> implements Tree<E> {
 	 * @throws InvalidPositionException si la posición pasada por parámetro es inválida, o el árbol está vacío, o la posición rb no corresponde a un nodo hijo del nodo referenciado por p.
 	 */
 	public Position<E> addBefore(Position<E> p, Position<E> rb, E e) {
-		TNodo<E> father = this.checkPosition(p);
-		TNodo<E> rightBrother = this.checkPosition(rb);
+		if (this.isEmpty())
+			throw new InvalidPositionException("Arbol vacio");
+		
+		TNode<E> father = this.checkPosition(p);
+		TNode<E> rightBrother = this.checkPosition(rb);
 		if (rightBrother.getFather() != father)
 			throw new InvalidPositionException("Right Brother no es hijo de Father");
 
-		TNodo<E> nuevo = new TNodo<E>(e, father);
+		TNode<E> nuevo = new TNode<E>(e, father);
 
-		for (Position<TNodo<E>> position : father.getChildrens().positions()) {
+		for (Position<TNode<E>> position : father.getChildrens().positions()) {
             if (position.element() == rightBrother) {
 				father.getChildrens().addBefore(position, nuevo);
                 this.size++;
@@ -208,14 +242,17 @@ public class ArbolGeneral<E> implements Tree<E> {
 	 * @throws InvalidPositionException si la posición pasada por parámetro es inválida, o el árbol está vacío, o la posición lb no corresponde a un nodo hijo del nodo referenciado por p.
 	 */
 	public Position<E> addAfter (Position<E> p, Position<E> lb, E e) {
-		TNodo<E> father = this.checkPosition(p);
-		TNodo<E> leftBrother = this.checkPosition(lb);
+		if (this.isEmpty())
+			throw new InvalidPositionException("Arbol vacio");
+
+		TNode<E> father = this.checkPosition(p);
+		TNode<E> leftBrother = this.checkPosition(lb);
 		if (leftBrother.getFather() != father)
 			throw new InvalidPositionException("Left Brother no es hijo de Father");
 
-		TNodo<E> nuevo = new TNodo<E>(e, father);
+		TNode<E> nuevo = new TNode<E>(e, father);
 
-		for (Position<TNodo<E>> position : father.getChildrens().positions()) {
+		for (Position<TNode<E>> position : father.getChildrens().positions()) {
             if (position.element() == leftBrother) {
 				father.getChildrens().addAfter(position, nuevo);
                 this.size++;
@@ -233,18 +270,23 @@ public class ArbolGeneral<E> implements Tree<E> {
 	public void removeExternalNode (Position<E> p) {
 		if (this.isEmpty())
 			throw new InvalidPositionException("Arbol vacio");
-		TNodo<E> nodo = this.checkPosition(p);
+
+		TNode<E> nodo = this.checkPosition(p);
 		if (!nodo.getChildrens().isEmpty())
 			throw new InvalidPositionException("P no es nodo externo");
 
-		PositionList<TNodo<E>> childrens = this.checkPosition(nodo.getFather()).getChildrens();
-		for (Position<TNodo<E>> position : childrens.positions()) {
-			if (position.element() == p) {
-				childrens.remove(position);
-				nodo.setElement(null);
-				this.size--;
+		if (nodo == this.root) {
+			this.root = null;
+		} else {
+			PositionList<TNode<E>> childrens = this.checkPosition(nodo.getFather()).getChildrens();
+			for (Position<TNode<E>> position : childrens.positions()) {
+				if (position.element() == p) {
+					childrens.remove(position);
+					nodo.setElement(null);
+				}
 			}
 		}
+		this.size--;
 	}
 	
 	/**
@@ -257,7 +299,7 @@ public class ArbolGeneral<E> implements Tree<E> {
 		if (this.isEmpty())
 			throw new InvalidPositionException("Arbol vacio");
 
-		TNodo<E> nodo = this.checkPosition(p);
+		TNode<E> nodo = this.checkPosition(p);
 
 		if (nodo.getChildrens().isEmpty())
 			throw new InvalidPositionException("P no es nodo interno");
@@ -272,28 +314,71 @@ public class ArbolGeneral<E> implements Tree<E> {
 			nodo.setElement(null);
 			nodo.getChildrens().remove(nodo.getChildrens().first());
 			this.root.setFather(null);
-		} else {
 
+		} else {
 			// agregar hijos de p a hijos de p.father, addBefore(p)
 			// desreferenciar childrens de p
-			TNodo<E> fatherP = this.checkPosition(nodo.getFather());
-			for (Position<TNodo<E>> position : nodo.getChildrens().positions()) {
-				fatherP.getChildrens().addBefore(position, fatherP);
+			TNode<E> fatherP = this.checkPosition(nodo.getFather());
+
+			Position<TNode<E>> posNodo = null;
+			for (Position<TNode<E>> hijo : fatherP.getChildrens().positions()) {
+				if (hijo.element() == nodo) {
+					posNodo = hijo;
+				}
+			}
+
+			for (Position<TNode<E>> position : nodo.getChildrens().positions()) {
+				fatherP.getChildrens().addBefore(posNodo, position.element());
 				position.element().setFather(fatherP);
-				nodo.getChildrens().remove(position);
 			}
 
 			// desreferenciar a p de p.father
+			fatherP.getChildrens().remove(posNodo);
 			nodo.setFather(null);
-			for (Position<TNodo<E>> position : fatherP.getChildrens().positions()) {
-				if (position.element() == nodo) {
-					fatherP.getChildrens().remove(position);
-				}
-			}
 		}
 		this.size--;
 	}
 	
+//  public void removeInternalNode (Position<E> p){
+//           if(isEmpty()){
+//             throw new InvalidPositionException("Arbol vacio");
+//         }
+//         TNodo<E> pos=checkPosition(p);
+//         if (pos.getHijos().isEmpty()) { 
+//         throw new InvalidPositionException("El nodo pasado por parámetro es una hoja, no un nodo interno");}
+//         if(pos==raiz){
+//             if(raiz.getHijos().size()!=1 ){// veo si el nodo es raiz y tiene un solo hijo
+//                 throw new InvalidPositionException("la posicion no es valida");
+//             }
+//             TNodo<E> unicoHijo=raiz.getHijos().first().element();
+//             raiz=unicoHijo;
+//             unicoHijo.setPadre(null);
+//         }
+//         else{
+//             TNodo<E> padre=pos.getPadre();
+//             PositionList<TNodo<E>> hermanos= padre.getHijos();
+           
+//             Position<TNodo<E>> posnodoenH=null;
+//             for(Position<TNodo<E>> posnodo: hermanos.positions()){
+//                 if(posnodo.element()==pos){
+//                     posnodoenH=posnodo;
+//                     break;
+//                 }
+//             }
+//             if(posnodoenH==null){
+//                 throw new InvalidPositionException("p no aparece en la lista de hijos de su padre");
+//             }
+//             for(TNodo<E> nodoHijo : pos.getHijos()){
+//                 nodoHijo.setPadre(padre);
+//                 hermanos.addBefore(posnodoenH,nodoHijo);
+//             }
+//             hermanos.remove(posnodoenH);
+//         }
+//             pos.setElemento(null);
+//             pos.setPadre(null);
+//             size--;
+//     }
+
 	/**
 	 * Elimina el nodo referenciado por una posición dada. Si se trata de un nodo interno, los hijos del nodo eliminado lo reemplazan en el mismo orden en el que aparecen. 
 	 * Si el nodo a eliminar es la raíz del árbol, únicamente podrá ser eliminado si tiene un solo hijo, el cual lo reemplazará.
@@ -308,13 +393,13 @@ public class ArbolGeneral<E> implements Tree<E> {
 		}
 	}
 
-	private TNodo<E> checkPosition(Position<E> p) {
+	private TNode<E> checkPosition(Position<E> p) {
 		try {
             if (p == null)
                 throw new InvalidPositionException("Posicion nula");
             if (p.element() == null)
                 throw new InvalidPositionException("p eliminada previamente");
-            return (TNodo<E>) p;
+            return (TNode<E>) p;
         } catch (InvalidPositionException e) {
             throw new InvalidPositionException("p no es un nodo de la lista");
         }

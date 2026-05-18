@@ -7,13 +7,13 @@ import ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
 
-public class ListaDEC<E> implements PositionList<E> {
-    protected DNodo<E> head, tail;
+public class ListDEC<E> implements PositionList<E> {
+    protected DNode<E> head, tail;
     protected int tamaño;
 
-    public ListaDEC() {
-        this.head = new DNodo<E>(null);
-        this.tail = new DNodo<E>(null, this.head, null);
+    public ListDEC() {
+        this.head = new DNode<E>(null);
+        this.tail = new DNode<E>(null, this.head, null);
         this.head.setSiguiente(this.tail);
         this.tamaño = 0;
     }
@@ -41,7 +41,7 @@ public class ListaDEC<E> implements PositionList<E> {
     }
 
     public Position<E> next(Position<E> p) {
-        DNodo<E> nodo = this.checkPosition(p);
+        DNode<E> nodo = this.checkPosition(p);
 
         if (nodo == this.last()) {
             throw new BoundaryViolationException("Ultimo elemento");
@@ -52,7 +52,7 @@ public class ListaDEC<E> implements PositionList<E> {
     }
 
     public Position<E> prev(Position<E> p) {
-        DNodo<E> nodo = this.checkPosition(p);
+        DNode<E> nodo = this.checkPosition(p);
 
         if (nodo == first()) {
             throw new BoundaryViolationException("Primer elemento");
@@ -62,37 +62,37 @@ public class ListaDEC<E> implements PositionList<E> {
     }
 
     public void addFirst(E element) {
-        DNodo<E> nuevo = new DNodo<E>(element, this.head, this.head.getSiguiente());
+        DNode<E> nuevo = new DNode<E>(element, this.head, this.head.getSiguiente());
         this.head.setSiguiente(nuevo);
         nuevo.getSiguiente().setPrevio(nuevo);
         this.tamaño++;
     }
 
     public void addLast(E element) {
-        DNodo<E> nuevo = new DNodo<E>(element, this.tail.getPrevio(), this.tail);
+        DNode<E> nuevo = new DNode<E>(element, this.tail.getPrevio(), this.tail);
         this.tail.setPrevio(nuevo);
         nuevo.getPrevio().setSiguiente(nuevo);
         this.tamaño++;
     }
 
     public void addAfter(Position<E> p, E element) {
-        DNodo<E> nodo = this.checkPosition(p);
-        DNodo<E> nuevo = new DNodo<E>(element, nodo, nodo.getSiguiente());
+        DNode<E> nodo = this.checkPosition(p);
+        DNode<E> nuevo = new DNode<E>(element, nodo, nodo.getSiguiente());
         nodo.setSiguiente(nuevo);
         nuevo.getSiguiente().setPrevio(nuevo);
         this.tamaño++;
     }
 
     public void addBefore(Position<E> p, E element) {
-        DNodo<E> nodo = this.checkPosition(p);
-        DNodo<E> nuevo = new DNodo<E>(element, nodo.getPrevio(), nodo);
+        DNode<E> nodo = this.checkPosition(p);
+        DNode<E> nuevo = new DNode<E>(element, nodo.getPrevio(), nodo);
         nodo.setPrevio(nuevo);
         nuevo.getPrevio().setSiguiente(nuevo);
         this.tamaño++;
     }
 
     public E remove(Position<E> p) {
-        DNodo<E> nodo = this.checkPosition(p);
+        DNode<E> nodo = this.checkPosition(p);
 
         nodo.getPrevio().setSiguiente(nodo.getSiguiente());
         nodo.getSiguiente().setPrevio(nodo.getPrevio());
@@ -104,7 +104,7 @@ public class ListaDEC<E> implements PositionList<E> {
     }
 
     public E set(Position<E> p, E element) {
-        DNodo<E> nodo = this.checkPosition(p);
+        DNode<E> nodo = this.checkPosition(p);
         E viejo = nodo.element();
         nodo.setElemento(element);
         return viejo;
@@ -115,8 +115,8 @@ public class ListaDEC<E> implements PositionList<E> {
     }
 
     public Iterable<Position<E>> positions() {
-        ListaDEC<Position<E>> lista = new ListaDEC<Position<E>>();
-        DNodo<E> nodo = this.head.getSiguiente();
+        ListDEC<Position<E>> lista = new ListDEC<Position<E>>();
+        DNode<E> nodo = this.head.getSiguiente();
 
         while (nodo != this.tail) {
             lista.addLast(nodo);
@@ -126,13 +126,13 @@ public class ListaDEC<E> implements PositionList<E> {
         return lista;
     }
 
-    private DNodo<E> checkPosition(Position<E> p) {
+    private DNode<E> checkPosition(Position<E> p) {
         try {
             if (p == null)
                 throw new InvalidPositionException("Posicion nula");
             if (p.element() == null)
                 throw new InvalidPositionException("p eliminada previamente");
-            return (DNodo<E>) p;
+            return (DNode<E>) p;
         } catch (InvalidPositionException e) {
             throw new InvalidPositionException("p no es un nodo de la lista");
         }
@@ -140,7 +140,7 @@ public class ListaDEC<E> implements PositionList<E> {
 
     public String toString() {
         String res = "";
-        DNodo<E> cursor = this.head.getSiguiente();
+        DNode<E> cursor = this.head.getSiguiente();
         while(cursor != this.tail) {
             res = res + "[" + cursor.getElemento() + "]";
             cursor = cursor.getSiguiente();

@@ -1,5 +1,7 @@
 package ar.edu.uns.cs.ed.tdas.tdadiccionario;
 
+import ar.edu.uns.cs.ed.tdas.tdadiccionario.Dictionary;
+import ar.edu.uns.cs.ed.tdas.tps.tp5.Diccionario;
 import ar.edu.uns.cs.ed.tdas.Entry;
 import ar.edu.uns.cs.ed.tdas.excepciones.*;
 
@@ -23,7 +25,7 @@ public class DictionaryTest {
 	private Dictionary<Integer, Integer> getDictionary() {
 
 		Dictionary<Integer, Integer> d = null;
-		//d = new DiccionarioHashAbierto<Integer, Integer>(); //TODO: Descomentar y crear instancia del TDA a testear
+		d = new Diccionario<Integer, Integer>(); //TODO: Descomentar y crear instancia del TDA a testear
 		return d;
 
 	}

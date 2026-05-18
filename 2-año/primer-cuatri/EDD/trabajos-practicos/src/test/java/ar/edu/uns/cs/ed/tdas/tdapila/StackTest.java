@@ -8,8 +8,9 @@
  */
 
 package ar.edu.uns.cs.ed.tdas.tdapila;
+import ar.edu.uns.cs.ed.tdas.tdapila.Stack;
 import ar.edu.uns.cs.ed.tdas.tps.tp3.Pila;
-import org.junit.*;                         //For tags
+import org.junit.*;                          //For tags
 import static org.junit.Assert.*;           //For assertions
 
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;

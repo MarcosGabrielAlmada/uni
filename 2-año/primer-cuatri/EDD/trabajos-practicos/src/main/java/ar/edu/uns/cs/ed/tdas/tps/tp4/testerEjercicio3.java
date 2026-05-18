@@ -2,7 +2,7 @@ package ar.edu.uns.cs.ed.tdas.tps.tp4;
 
 public class testerEjercicio3 {
     public static void main(String[] args) {
-        ListaDEC<String> lista = new ListaDEC<>();
+        ListDEC<String> lista = new ListDEC<>();
         lista.addFirst("1");
         lista.addFirst("1");
         lista.addFirst("1");

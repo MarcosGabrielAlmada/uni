@@ -4,13 +4,10 @@ import ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyTreeException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidOperationException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
-import ar.edu.uns.cs.ed.tdas.tdaarbol.Tree;
 import ar.edu.uns.cs.ed.tdas.tdaarbolbinario.BinaryTree;
 import ar.edu.uns.cs.ed.tdas.Position;
 import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
-import ar.edu.uns.cs.ed.tdas.tps.tp4.DNodo;
-import ar.edu.uns.cs.ed.tdas.tps.tp4.ListaDEC;
-import ar.edu.uns.cs.ed.tdas.tps.tp6.TNodo;
+import ar.edu.uns.cs.ed.tdas.tps.tp4.ListDEC;
 import java.util.Iterator;
 
 public class ArbolBinario<E> implements BinaryTree<E> {
@@ -43,7 +40,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 	 * @return Iterador de los elementos almacenados en el árbol.
 	 */
 	public Iterator<E> iterator() {
-		PositionList<E> lista = new ListaDEC<E>();
+		PositionList<E> lista = new ListDEC<E>();
 		for (Position<E> p : this.positions()) {
 			lista.addLast(p.element());
 		}
@@ -55,19 +52,30 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 	 * @return Colección iterable de las posiciones de los nodos del árbol.
 	 */
 	public Iterable<Position<E>> positions() {
-		PositionList<Position<E>> lista = new ListaDEC<>();
+		PositionList<Position<E>> lista = new ListDEC<>();
 		
 		if(!this.isEmpty()) {
-			this.preorden(this.checkPosition(this.root), lista);
+			this.preOrden(this.checkPosition(this.root), lista);
 		}
 		return lista;
 	}
 
-	private void preorden(BTNodo<E> nodo, PositionList<Position<E>> lista) {
+	private void preOrden(BTPosition<E> nodo, PositionList<Position<E>> lista) {
 		lista.addLast(nodo);
-		for (BTPosition<E> n : nodo.getChildrens()) {
-			this.preorden(nodo, lista);
-		}
+		if (this.hasLeft(nodo)) { this.preOrden(nodo.getLeft(), lista); }
+		if (this.hasRight(nodo)) { this.preOrden(nodo.getRight(), lista); }
+	}
+
+	private void inOrden(BTPosition<E> nodo, PositionList<Position<E>> lista) {
+		if (this.hasLeft(nodo)) { this.inOrden(nodo.getLeft(), lista); }
+		lista.addLast(nodo);
+		if (this.hasRight(nodo)) { this.inOrden(nodo.getRight(), lista); }
+	}
+
+	private void postOrden(BTPosition<E> nodo, PositionList<Position<E>> lista) {
+		if (this.hasLeft(nodo)) { this.postOrden(nodo.getLeft(), lista); }
+		if (this.hasRight(nodo)) { this.postOrden(nodo.getRight(), lista); }
+		lista.addLast(nodo);
 	}
 	
 	/**
@@ -117,10 +125,10 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 	 */
 	public Iterable<Position<E>> children(Position<E> v) {
 		BTPosition<E> nodo = this.checkPosition(v);
-		PositionList<Position<E>> lista = new ListaDEC<Position<E>>();
+		PositionList<Position<E>> lista = new ListDEC<Position<E>>();
 
 		if (this.hasLeft(v)) { lista.addLast(nodo.getLeft()); }
-		if (this.hasLeft(v)) { lista.addLast(nodo.getLeft()); }
+		if (this.hasRight(v)) { lista.addLast(nodo.getRight()); }
 
 		return lista;
 	}
@@ -166,7 +174,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 	public void createRoot(E e) {
 		if (this.root != null)
 			throw new InvalidOperationException("Root ya existe");
-		this.root = new BTNodo<E>(e, null);
+		this.root = new BTNode<E>(e, null);
 		this.size++;
 	}
 	
@@ -184,7 +192,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 			throw new InvalidPositionException("P ya tiene FirstChild");
 
 		BTPosition<E> nodo = this.checkPosition(p);
-		BTPosition<E> nuevo = new BTNodo<E>(e, nodo);
+		BTPosition<E> nuevo = new BTNode<E>(e, nodo);
 		nodo.setLeft(nuevo);
 		this.size++;
 		return nuevo;
@@ -204,7 +212,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 			throw new InvalidPositionException("P ya tiene LastChild");
 
 		BTPosition<E> nodo = this.checkPosition(p);
-		BTPosition<E> nuevo = new BTNodo<E>(e, nodo);
+		BTPosition<E> nuevo = new BTNode<E>(e, nodo);
 		nodo.setRight(nuevo);
 		this.size++;
 		return nuevo;
@@ -224,7 +232,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 
 		BTPosition<E> nodo = this.checkPosition(p);
 		BTPosition<E> rightBrother = this.checkPosition(rb);
-		BTPosition<E> nuevo = new BTNodo<E>(e, nodo);
+		BTPosition<E> nuevo = new BTNode<E>(e, nodo);
 
 		if (nodo.getLeft() == rightBrother) {
 			nodo.setRight(rightBrother);
@@ -254,7 +262,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 
 		BTPosition<E> nodo = this.checkPosition(p);
 		BTPosition<E> leftBrother = this.checkPosition(lb);
-		BTPosition<E> nuevo = new BTNodo<E>(e, nodo);
+		BTPosition<E> nuevo = new BTNode<E>(e, nodo);
 
 		if (nodo.getLeft() == leftBrother) {
 			nodo.setRight(nuevo);
@@ -374,9 +382,9 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 	public void removeNode (Position<E> p) {
 		BTPosition<E> nodo = this.checkPosition(p);
 		if (this.hasLeft(nodo) || this.hasRight(nodo)) {
-			this.removeInternalNode(p);
+			this.removeInternalNode(p); // este decrementa size
 		} else {
-			this.removeExternalNode(p);
+			this.removeExternalNode(p); // este decrementa size
 		}
 	}
 
@@ -447,8 +455,9 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 		if (this.hasLeft(nodo))
 			throw new InvalidOperationException("V ya tiene Left");
 
-		BTPosition<E> nuevo = new BTNodo<E>(r, nodo);
+		BTPosition<E> nuevo = new BTNode<E>(r, nodo);
 		nodo.setLeft(nuevo);
+		this.size++;
 		return nuevo;
 	}
 
@@ -469,8 +478,9 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 		if (this.hasRight(nodo))
 			throw new InvalidOperationException("V ya tiene Right");
 
-		BTPosition<E> nuevo = new BTNodo<E>(r, nodo);
+		BTPosition<E> nuevo = new BTNode<E>(r, nodo);
 		nodo.setRight(nuevo);
+		this.size++;
 		return nuevo;
 	}
 
@@ -486,22 +496,27 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 		if (this.isInternal(nodo))
 			throw new InvalidPositionException("R es Internal");
 
-		BTPosition<E> root1 = this.checkPosition(T1.root());
-		BTPosition<E> root2 = this.checkPosition(T2.root());
-		nodo.setLeft(root1);
-		nodo.setRight(root2);
-		root1.setParent(nodo);
-		root2.setParent(nodo);
+		if (!T1.isEmpty()) {
+			BTPosition<E> root1 = this.checkPosition(T1.root());
+			nodo.setLeft(root1);
+			root1.setParent(nodo);
+		}
+		if (!T2.isEmpty()) {
+			BTPosition<E> root2 = this.checkPosition(T2.root());
+			nodo.setRight(root2);
+			root2.setParent(nodo);
+		}
+		this.size += T1.size() + T2.size();
 	}
 
 	
-	private BTNodo<E> checkPosition(Position<E> p) {
+	private BTNode<E> checkPosition(Position<E> p) {
 		try {
             if (p == null)
                 throw new InvalidPositionException("Posicion nula");
             if (p.element() == null)
                 throw new InvalidPositionException("p eliminada previamente");
-            return (BTNodo<E>) p;
+            return (BTNode<E>) p;
         } catch (InvalidPositionException e) {
             throw new InvalidPositionException("p no es un nodo de la lista");
         }

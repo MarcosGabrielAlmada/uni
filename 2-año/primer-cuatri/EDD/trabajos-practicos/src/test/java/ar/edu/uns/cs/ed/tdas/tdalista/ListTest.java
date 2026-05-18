@@ -1,6 +1,8 @@
 package ar.edu.uns.cs.ed.tdas.tdalista;
 
 import ar.edu.uns.cs.ed.tdas.excepciones.*;
+import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
+import ar.edu.uns.cs.ed.tdas.tps.tp4.ListDEC;
 import ar.edu.uns.cs.ed.tdas.Position;
 
 import static org.junit.Assert.*;
@@ -18,7 +20,7 @@ public class ListTest {
 
 	private PositionList<String> getList() {
 		PositionList<String> lista = null;
-		//lista = new ListaDoblementeEnlazada<String>(); //TODO: Descomentar y crear instancia del TDA a testear
+		lista = new ListDEC<String>(); //TODO: Descomentar y crear instancia del TDA a testear
 		return lista;
 	}
 
