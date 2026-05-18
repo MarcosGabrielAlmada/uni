@@ -1,6 +1,5 @@
 package ar.edu.uns.cs.ed.tdas.tdadiccionario;
 
-import ar.edu.uns.cs.ed.tdas.tdadiccionario.Dictionary;
 import ar.edu.uns.cs.ed.tdas.tps.tp5.Diccionario;
 import ar.edu.uns.cs.ed.tdas.Entry;
 import ar.edu.uns.cs.ed.tdas.excepciones.*;

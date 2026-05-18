@@ -20,7 +20,7 @@ public class HashMap<K,V> implements Map<K,V> {
             this.bucket[i] = new ListDEC<Entrada<K,V>>();
         }
         this.factorDeCarga = 0;
-        this.cant = 13;
+        this.cant = 0;
     }
 
     public int size() {
@@ -34,14 +34,15 @@ public class HashMap<K,V> implements Map<K,V> {
 	public V get(K key) {
         if (key == null)
             throw new InvalidKeyException("Clave nula");
-        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
+
+        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key, this.bucket.length)];
         for (Entrada<K,V> e : lista) {
-            if (e.getKey() == key) {
+            if (e.getKey().equals(key)) {
                 return e.getValue();
             }
         }
-        throw new InvalidKeyException("La clave no pertenece");
-        
+
+        return null;   
     }
 
 
@@ -53,9 +54,9 @@ public class HashMap<K,V> implements Map<K,V> {
         if (key == null)
             throw new InvalidKeyException("Clave nula");
 
-        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
+        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key, this.bucket.length)];
         for (Entrada<K,V> e : lista) {
-            if (e.getKey() == key) {
+            if (e.getKey().equals(key)) {
                 V aux = e.getValue();
                 e.setValue(value);
 
@@ -65,7 +66,7 @@ public class HashMap<K,V> implements Map<K,V> {
 
         lista.addLast(new Entrada<K,V>(key, value));
         this.cant++;
-        this.factorDeCarga = this.cant/this.bucket.length;
+        this.factorDeCarga = (float)this.cant / this.bucket.length;
         if (this.factorDeCarga > LIMITE_FACTOR_CARGA) {
             this.rehash();
         }
@@ -76,7 +77,7 @@ public class HashMap<K,V> implements Map<K,V> {
         if (key == null)
             throw new InvalidKeyException("Clave nula");
 
-        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key)];
+        ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(key, this.bucket.length)];
         for (Position<Entrada<K,V>> p : lista.positions()) {
             if (p.element().getKey() == key) {
                 V aux = p.element().getValue();
@@ -85,55 +86,30 @@ public class HashMap<K,V> implements Map<K,V> {
                 return aux;
             }
         }
-        throw new InvalidKeyException("La clave no pertenece");
+        return null;
     }
-
-    // private Position<Entrada<K,V>> buscarPosition(K key) {
-    //     if (key != null) {
-    //         for (int i = 0; i < this.size(); i++) {
-    //             if (this.bucket[i] != null) {
-    //                 for (Position<Entrada<K,V>> p : this.bucket[i].positions()) {
-    //                     if (p.element().getKey() == key) {
-    //                         return p;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     throw new InvalidKeyException("Invalid Key");
-    // }
-
-    // private ListaDEC<Entrada<K,V>> buscarLista(K key) {
-    //     for (int i = 0; i < this.size(); i++) {
-    //         if (this.bucket[i] != null) {
-    //             for (Position<Entrada<K,V>> p : this.bucket[i].positions()) {
-    //                 if (p.element().getKey() == key) {
-    //                     return this.bucket[i];
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     throw new InvalidKeyException("Invalid Key");
-    // }
 
     private int proximoPrimo(int i) {
-        boolean esPrimo = true;
-        while (esPrimo) {
-            for (int j = 2; j < i && esPrimo; j++) {
+        boolean esPrimo;
+        while (true) {
+            esPrimo = true;
+
+            for (int j = 2; j < i; j++) {
                 if (i % j == 0) {
                     esPrimo = false;
+                    break;
                 }
             }
-            if (!esPrimo) {
-                esPrimo = true;
-                i++;
-            }
+
+            if (esPrimo)
+                return i;
+
+            i++;
         }
-        return i;
     }
 
-    private int hash(K k) {
-        return k.hashCode() % this.size();
+    private int hash(K k, int length) {
+        return Math.abs(k.hashCode()) % length;
     }
 
     private void rehash() {
@@ -145,7 +121,7 @@ public class HashMap<K,V> implements Map<K,V> {
 
         for (int i = 0; i < this.bucket.length; i++) {
             for (Entrada<K,V> e : this.bucket[i]) {
-                nuevo[this.hash(e.getKey())].addLast(e);
+                nuevo[this.hash(e.getKey(), nuevo.length)].addLast(e);
             }
         }
         this.bucket = nuevo;
@@ -153,7 +129,7 @@ public class HashMap<K,V> implements Map<K,V> {
 
 	public Iterable<K> keys() {
         ListDEC<K> lista = new ListDEC<K>();
-        for (int i = 0; i < this.size(); i++) {
+        for (int i = 0; i < this.bucket.length; i++) {
             for (Entry<K,V> e : this.bucket[i]) {
                 lista.addLast(e.getKey());
             }
@@ -163,7 +139,7 @@ public class HashMap<K,V> implements Map<K,V> {
 
 	public Iterable<V> values() {
         ListDEC<V> lista = new ListDEC<V>();
-        for (int i = 0; i < this.size(); i++) {
+        for (int i = 0; i < this.bucket.length; i++) {
             for (Entry<K,V> e : this.bucket[i]) {
                 lista.addLast(e.getValue());
             }
@@ -173,7 +149,7 @@ public class HashMap<K,V> implements Map<K,V> {
 
 	public Iterable<Entry<K,V>> entries() {
         ListDEC<Entry<K,V>> lista = new ListDEC<Entry<K,V>>();
-        for (int i = 0; i < this.size(); i++) {
+        for (int i = 0; i < this.bucket.length; i++) {
             for (Entry<K,V> e : this.bucket[i]) {
                 lista.addLast(e);
             }

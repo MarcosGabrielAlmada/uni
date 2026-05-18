@@ -20,7 +20,7 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 			this.bucket[i] = new ListDEC<Entrada<K,V>>();
 		}
 		this.factorDeCarga = 0;
-        this.cant = 13;
+        this.cant = 0;
     }
 
     /**
@@ -49,14 +49,13 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
         if (key == null)
             throw new InvalidKeyException("Clave nula");
 
-		for (Entrada<K,V> e : this.bucket[this.hash(key)]) {
-			if (e.getKey() == key) {
+		for (Entrada<K,V> e : this.bucket[this.hash(key, this.bucket.length)]) {
+			if (e.getKey().equals(key)) {
 				return e;
 			}
 		}
 
-        
-        throw new InvalidKeyException("La clave no pertenece");
+		return null;
     }
 	
 	/**
@@ -72,14 +71,11 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
         ListDEC<Entry<K,V>> all = new ListDEC<Entry<K,V>>();
 		for (int i = 0; i < this.bucket.length; i++) {
 			for (Entrada<K,V> e : this.bucket[i]) {
-				if (e.getKey() == key) {
+				if (e.getKey().equals(key)) {
 					all.addLast(e);
 				}
 			}
 		}
-
-		if (all.isEmpty())
-			throw new InvalidKeyException("La clave no pertenece");
 
         return all;
     }
@@ -95,10 +91,10 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 			throw new InvalidKeyException("Clave nula");
 
 		Entrada<K,V> e = new Entrada<K,V>(key, value);
-		this.bucket[this.hash(key)].addLast(e);
+		this.bucket[this.hash(key, this.bucket.length)].addLast(e);
 
 		this.cant++;
-		this.factorDeCarga = this.cant / this.bucket.length;
+		this.factorDeCarga = (float)this.cant / this.bucket.length;
 		if (factorDeCarga > LIMITE_FACTOR_CARGA) {
 			this.rehash();
 		}
@@ -115,7 +111,7 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 		if (e == null)
 			throw new InvalidEntryException("Entrada nula");
 
-		ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(e.getKey())];
+		ListDEC<Entrada<K,V>> lista = this.bucket[this.hash(e.getKey(), this.bucket.length)];
 		for (Position<Entrada<K,V>> p : lista.positions()) {
 			if (e == p.element()) {
 				lista.remove(p);
@@ -127,9 +123,9 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 		throw new InvalidEntryException("La clave no pertenece");
     }
 
-	public int hash(K k) {
-		return k.hashCode() % this.size();
-	}
+	private int hash(K k, int length) {
+        return Math.abs(k.hashCode()) % length;
+    }
 
 	public void rehash() {
 		ListDEC<Entrada<K,V>>[] nuevo = new ListDEC[this.proximoPrimo(this.bucket.length*2)];
@@ -140,26 +136,29 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 
 		for (int i = 0; i < this.bucket.length; i++) {
 			for (Entrada<K,V> e : this.bucket[i]) {
-				nuevo[this.hash(e.getKey())].addLast(e);
+				nuevo[this.hash(e.getKey(), nuevo.length)].addLast(e);
 			}
 		}
 		this.bucket = nuevo;
 	}
 
 	private int proximoPrimo(int i) {
-        boolean esPrimo = true;
-        while (esPrimo) {
-            for (int j = 2; j < i && esPrimo; j++) {
+        boolean esPrimo;
+        while (true) {
+            esPrimo = true;
+
+            for (int j = 2; j < i; j++) {
                 if (i % j == 0) {
                     esPrimo = false;
+                    break;
                 }
             }
-            if (!esPrimo) {
-                esPrimo = true;
-                i++;
-            }
+
+            if (esPrimo)
+                return i;
+
+            i++;
         }
-        return i;
     }
 	
 	/**
@@ -168,13 +167,11 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 	 */
 	public Iterable<Entry<K,V>> entries() {
 		ListDEC<Entry<K,V>> lista = new ListDEC<Entry<K,V>>();
-
 		for (int i = 0; i < this.bucket.length; i++) {
 			for (Entry<K,V> e : this.bucket[i]) {
 				lista.addLast(e);
 			}
 		}
-
 		return lista;
     }
 	
