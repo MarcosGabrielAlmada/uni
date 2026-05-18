@@ -304,80 +304,44 @@ public class Arbol<E> implements Tree<E> {
 		if (nodo.getChildrens().isEmpty())
 			throw new InvalidPositionException("P no es nodo interno");
 
-		if (nodo == this.root && nodo.getChildrens().size() > 1 )
-			throw new InvalidPositionException("Root tiene mas de un hijo");
-
-
-		// root con un solo hijo
 		if (nodo == this.root) {
+
+			// root con mas de 1 hijo
+			if (nodo.getChildrens().size() > 1 )
+				throw new InvalidPositionException("Root tiene mas de un hijo");
+
+			// root con un solo hijo
 			this.root = nodo.getChildrens().first().element();
+			this.root.setFather(null);
 			nodo.setElement(null);
 			nodo.getChildrens().remove(nodo.getChildrens().first());
-			this.root.setFather(null);
 
 		} else {
 			// agregar hijos de p a hijos de p.father, addBefore(p)
 			// desreferenciar childrens de p
 			TNode<E> fatherP = this.checkPosition(nodo.getFather());
+			PositionList<TNode<E>> childrensFatherP = fatherP.getChildrens();
 
 			Position<TNode<E>> posNodo = null;
-			for (Position<TNode<E>> hijo : fatherP.getChildrens().positions()) {
+			for (Position<TNode<E>> hijo : childrensFatherP.positions()) {
 				if (hijo.element() == nodo) {
 					posNodo = hijo;
+					break;
 				}
 			}
 
-			for (Position<TNode<E>> position : nodo.getChildrens().positions()) {
-				fatherP.getChildrens().addBefore(posNodo, position.element());
-				position.element().setFather(fatherP);
+			for (TNode<E> n : nodo.getChildrens()) {
+				n.setFather(fatherP);
+				childrensFatherP.addBefore(posNodo, n);
 			}
 
 			// desreferenciar a p de p.father
-			fatherP.getChildrens().remove(posNodo);
+			childrensFatherP.remove(posNodo);
 			nodo.setFather(null);
 		}
 		this.size--;
 	}
 	
-//  public void removeInternalNode (Position<E> p){
-//           if(isEmpty()){
-//             throw new InvalidPositionException("Arbol vacio");
-//         }
-//         TNodo<E> pos=checkPosition(p);
-//         if (pos.getHijos().isEmpty()) { 
-//         throw new InvalidPositionException("El nodo pasado por parámetro es una hoja, no un nodo interno");}
-//         if(pos==raiz){
-//             if(raiz.getHijos().size()!=1 ){// veo si el nodo es raiz y tiene un solo hijo
-//                 throw new InvalidPositionException("la posicion no es valida");
-//             }
-//             TNodo<E> unicoHijo=raiz.getHijos().first().element();
-//             raiz=unicoHijo;
-//             unicoHijo.setPadre(null);
-//         }
-//         else{
-//             TNodo<E> padre=pos.getPadre();
-//             PositionList<TNodo<E>> hermanos= padre.getHijos();
-           
-//             Position<TNodo<E>> posnodoenH=null;
-//             for(Position<TNodo<E>> posnodo: hermanos.positions()){
-//                 if(posnodo.element()==pos){
-//                     posnodoenH=posnodo;
-//                     break;
-//                 }
-//             }
-//             if(posnodoenH==null){
-//                 throw new InvalidPositionException("p no aparece en la lista de hijos de su padre");
-//             }
-//             for(TNodo<E> nodoHijo : pos.getHijos()){
-//                 nodoHijo.setPadre(padre);
-//                 hermanos.addBefore(posnodoenH,nodoHijo);
-//             }
-//             hermanos.remove(posnodoenH);
-//         }
-//             pos.setElemento(null);
-//             pos.setPadre(null);
-//             size--;
-//     }
 
 	/**
 	 * Elimina el nodo referenciado por una posición dada. Si se trata de un nodo interno, los hijos del nodo eliminado lo reemplazan en el mismo orden en el que aparecen. 
