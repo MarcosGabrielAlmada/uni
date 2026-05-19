@@ -517,7 +517,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
             if (p.element() == null)
                 throw new InvalidPositionException("p eliminada previamente");
             return (BTNode<E>) p;
-        } catch (InvalidPositionException e) {
+        } catch (InvalidPositionException e) { // TODO - cast exception
             throw new InvalidPositionException("p no es un nodo de la lista");
         }
 	}
