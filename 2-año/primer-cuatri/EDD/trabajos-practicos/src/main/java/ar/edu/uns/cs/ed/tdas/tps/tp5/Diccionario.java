@@ -1,11 +1,12 @@
 package ar.edu.uns.cs.ed.tdas.tps.tp5;
 
-import ar.edu.uns.cs.ed.tdas.tdadiccionario.Dictionary;
 import ar.edu.uns.cs.ed.tdas.Entry;
 import ar.edu.uns.cs.ed.tdas.Position;
-import ar.edu.uns.cs.ed.tdas.tps.tp4.ListDEC;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidEntryException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
+import ar.edu.uns.cs.ed.tdas.tdadiccionario.Dictionary;
+import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
+import ar.edu.uns.cs.ed.tdas.tps.tp4.ListDEC;
 
 public class Diccionario<K,V> implements Dictionary<K,V> {
     private final float LIMITE_FACTOR_CARGA = 0.75f;
@@ -174,5 +175,30 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 		}
 		return lista;
     }
-	
+
+
+	// ------------------ EJERCICIO 5 A) ------------------
+	/**
+	 * Elimina todas aquellas entradas con clave c y valor v.
+	 * @return Colección iterable con todas las entradas eliminadas.
+	 */
+	public Iterable<Entry<K,V>> eliminarTodas(K c,V v) throws InvalidKeyException {
+		if (c == null) // c1
+			throw new InvalidKeyException("Key C nula"); // c2
+
+		PositionList<Entry<K,V>> lista = new ListDEC<>(); // c3
+		for (Entry<K,V> e : this.entries()) { // c4 + T_this.entries(n) = c4 + n
+			if (e.getKey().equals(c) && e.getValue().equals(v)) { // c5 + c6 + c7 + c8 + c9 + c10
+				lista.addLast(e); // c11
+				this.remove(e); // c12 + O(1) promedio --- ó --- c12 + O(n) peor caso
+				// remove -> n + (n-1) + ... + 1 = O(n), por cada eliminacion va a estar buscando en (n-i), siendo i la cantidad de iteraciones menos 1
+			}
+		}
+		return lista; // c13
+	}
+
+	// T(n) = c1 + c3 + c4 + T_this.entries(n) + n * (c5 + c6 + c7 + c8 + c9 + c10 + c11 + c12 + O(n)) + c13
+	//      = const1 + n + n * (const2 + O(n))
+	//      = const1 + n * ( 1 + const2 + O(n))
+	//      = O(n^2) donde n = |this|
 }
