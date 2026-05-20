@@ -491,21 +491,69 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 	 * @throws InvalidPositionException si la posición pasada por parámetro es inválida o el árbol está vacío, o v no corresponde a una hoja.
 	 */
 	public void attach(Position<E> r, BinaryTree<E> T1, BinaryTree<E> T2) {
-		BTPosition<E> nodo = this.checkPosition(r);
-		if (this.isInternal(nodo))
-			throw new InvalidPositionException("R es Internal");
-
-		if (!T1.isEmpty()) {
-			BTPosition<E> root1 = this.checkPosition(T1.root());
-			nodo.setLeft(root1);
-			root1.setParent(nodo);
+    // c1
+    if (this.isEmpty())
+        throw new InvalidPositionException("Arbol vacio");
+    
+    // c2
+    BTPosition<E> nodo = this.checkPosition(r);
+    
+    // c3
+    if (this.isInternal(nodo))
+        throw new InvalidPositionException("R es Internal");
+    
+    // Clonar T1 e insertar como hijo izquierdo
+    if (!T1.isEmpty()) {                        // c4
+        // c5 + T_clonar(n1) - clonación manual recursiva
+        BTPosition<E> root1 = this.clonarRecursivo(T1.root(), null, T1);
+        nodo.setLeft(root1);                    // c6
+        root1.setParent(nodo);                  // c7
+    }
+    
+    // Clonar T2 e insertar como hijo derecho
+    if (!T2.isEmpty()) {                        // c8
+        // c9 + T_clonar(n2) - clonación manual recursiva
+        BTPosition<E> root2 = this.clonarRecursivo(T2.root(), null, T2);
+        nodo.setRight(root2);                   // c10
+        root2.setParent(nodo);                  // c11
+    }
+    
+    // c12 - Actualizar tamaño
+    this.size += T1.size() + T2.size();
+	}
+	
+	/**
+	 * Clona recursivamente un árbol binario de forma manual.
+	 * Recorre el árbol T con preorden, creando nuevos nodos en el árbol actual.
+	 * 
+	 * @param p Posición actual a clonar (en el árbol T).
+	 * @param padre Padre del nodo a crear (null para la raíz clonada).
+	 * @param T Árbol original del cual se obtienen los nodos.
+	 * @return La raíz del árbol clonado en el árbol actual.
+	 */
+	private BTPosition<E> clonarRecursivo(Position<E> p, BTPosition<E> padre, BinaryTree<E> T) {
+		// Caso base: nodo vacío
+		if (p == null)                              // c1
+			return null;                            // c2
+		
+		// Crear nuevo nodo con el elemento de p
+		BTPosition<E> nuevo = new BTNode<E>(p.element(), padre); // c3
+		
+		// Recursión en subárbol izquierdo
+		if (T.hasLeft(p)) {                         // c4
+			// T_clonar(izquierdo)
+			BTPosition<E> izq = this.clonarRecursivo(T.left(p), nuevo, T);
+			nuevo.setLeft(izq);                     // c5
 		}
-		if (!T2.isEmpty()) {
-			BTPosition<E> root2 = this.checkPosition(T2.root());
-			nodo.setRight(root2);
-			root2.setParent(nodo);
+		
+		// Recursión en subárbol derecho
+		if (T.hasRight(p)) {                        // c6
+			// T_clonar(derecho)
+			BTPosition<E> der = this.clonarRecursivo(T.right(p), nuevo, T);
+			nuevo.setRight(der);                    // c7
 		}
-		this.size += T1.size() + T2.size();
+		
+		return nuevo;                               // c8
 	}
 
 	
