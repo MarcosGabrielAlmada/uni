@@ -326,7 +326,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 				hijo.setParent(null);
 				this.root = hijo;
 			} else { // no tiene hijos
-				this.root = null;
+				throw new InvalidPositionException("P es Root, Root no tiene hijos");
 			}
 
 		} else { // no es la raiz
@@ -460,8 +460,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 		this.size++;
 		return nuevo;
 	}
-
-
+	
 	/**
 	 * Agrega un nodo con rótulo r como hijo derecho de un nodo dado.
 	 * @param r Rótulo del nuevo nodo.
