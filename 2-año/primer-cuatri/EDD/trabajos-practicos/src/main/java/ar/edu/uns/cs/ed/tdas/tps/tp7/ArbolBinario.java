@@ -325,7 +325,7 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 			if (hijo != null) { // tiene 1 hijo
 				hijo.setParent(null);
 				this.root = hijo;
-			} else { // no tiene hijos
+			} else { // no tiene hijos (esto nose si esta bien)
 				throw new InvalidPositionException("P es Root, Root no tiene hijos");
 			}
 
@@ -558,13 +558,13 @@ public class ArbolBinario<E> implements BinaryTree<E> {
 
 	
 	private BTNode<E> checkPosition(Position<E> p) {
+		if (p == null)
+			throw new InvalidPositionException("Posicion nula");
+		if (p.element() == null)
+			throw new InvalidPositionException("p eliminada previamente");
 		try {
-            if (p == null)
-                throw new InvalidPositionException("Posicion nula");
-            if (p.element() == null)
-                throw new InvalidPositionException("p eliminada previamente");
             return (BTNode<E>) p;
-        } catch (InvalidPositionException e) { // TODO - cast exception
+        } catch (ClassCastException e) {
             throw new InvalidPositionException("p no es un nodo de la lista");
         }
 	}

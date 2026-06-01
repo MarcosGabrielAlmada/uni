@@ -133,7 +133,7 @@ public class ListDEC<E> implements PositionList<E> {
             if (p.element() == null)
                 throw new InvalidPositionException("p eliminada previamente");
             return (DNode<E>) p;
-        } catch (InvalidPositionException e) {
+        } catch (ClassCastException e) {
             throw new InvalidPositionException("p no es un nodo de la lista");
         }
     }

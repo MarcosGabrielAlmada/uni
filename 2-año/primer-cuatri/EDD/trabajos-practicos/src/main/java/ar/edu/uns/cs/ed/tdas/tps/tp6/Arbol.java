@@ -358,13 +358,13 @@ public class Arbol<E> implements Tree<E> {
 	}
 
 	private TNode<E> checkPosition(Position<E> p) {
+		if (p == null)
+			throw new InvalidPositionException("Posicion nula");
+		if (p.element() == null)
+			throw new InvalidPositionException("p eliminada previamente");
 		try {
-            if (p == null)
-                throw new InvalidPositionException("Posicion nula");
-            if (p.element() == null)
-                throw new InvalidPositionException("p eliminada previamente");
             return (TNode<E>) p;
-        } catch (InvalidPositionException e) {
+        } catch (ClassCastException e) {
             throw new InvalidPositionException("p no es un nodo de la lista");
         }
 	}

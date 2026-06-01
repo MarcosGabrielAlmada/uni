@@ -132,7 +132,7 @@ public class Diccionario<K,V> implements Dictionary<K,V> {
 		ListDEC<Entrada<K,V>>[] nuevo = new ListDEC[this.proximoPrimo(this.bucket.length*2)];
 
         for (int i = 0; i < nuevo.length; i++) {
-            nuevo[i] = new ListDEC<Entrada<K,V>>();
+            nuevo[i] = new ListDEC<Entrada<K,V>>(); // esto se podria meter en el otro for, con un if
         }
 
 		for (int i = 0; i < this.bucket.length; i++) {
