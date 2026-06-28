@@ -25,4 +25,8 @@ public class Entrada<K,V> implements Entry<K,V> {
     public void setValue(V value) {
         this.value = value;
     }
+
+    public String toString() {
+        return "(" + this.key + ", " + this.value + ")";
+    }
 }

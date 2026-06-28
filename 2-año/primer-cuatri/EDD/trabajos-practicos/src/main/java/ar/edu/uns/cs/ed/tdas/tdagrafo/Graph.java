@@ -45,7 +45,7 @@ public interface Graph<V,E> {
 	 * @return Un Arreglo de 2 elementos con los extremos de un Arco e.
 	 * @throws InvalidEdgeException si el arco es inválido.
 	 */
-	public Vertex<V> [] endvertices(Edge<E> e);
+	public Vertex<V> [] endVertices(Edge<E> e);
 	
 	/**
 	 * Devuelve verdadero si el vértice w es adyacente al vértice v.

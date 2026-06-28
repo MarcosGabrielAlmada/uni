@@ -1,0 +1,7 @@
+package ar.edu.uns.cs.ed.tdas.tps.tp9;
+
+public class DefaultComparator<E extends Comparable<E>> implements java.util.Comparator<E> {
+	public int compare(E a, E b) {
+		return a.compareTo(b);
+	}
+}
