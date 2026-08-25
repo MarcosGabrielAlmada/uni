@@ -1,0 +1,1 @@
+Se espeja el contenido del arreglo

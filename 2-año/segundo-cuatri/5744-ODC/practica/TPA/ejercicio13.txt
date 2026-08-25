@@ -1,0 +1,4 @@
+-123
+ascii = [30, 20, 10, -, \0]
+
+agrega a ascii[] cada digito, empezando por el ultimo, con un 0 (1 => 10), al final agrega el signo en caso de ser integer negativo y un '\0'. Luego con misterio espeja los elementos

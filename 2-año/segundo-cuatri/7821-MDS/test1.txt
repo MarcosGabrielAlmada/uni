@@ -1,0 +1,8 @@
+Lectura obligatoria para test 1 y clase del día 28/8/2026
+
+Sección 4.1 Modelo conceptual de los datos en UML (pag 39 a 57) de:
+
+TENIENTE LÓPEZ, E. COSTAL COSTA, D. ; SANCHO SAMSÓ, M. R.
+Especificación de sistemas software en UML. ed. Barcelona: Universitat Politècnica de Catalunya, 2015. 172 p.
+Disponible en: https://elibro.net/es/ereader/unsbiblio/61407?page=40.
+Consultado en: 24 Aug 2026.

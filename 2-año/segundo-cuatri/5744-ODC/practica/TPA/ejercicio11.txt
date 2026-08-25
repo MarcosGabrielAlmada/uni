@@ -1,0 +1,11 @@
+sorpresa_3(12856)
+	toReturn: 6 * 1000 + 1 = 6001
+	aux: 1
+
+sorpresa_2(12856)
+	toReturn: 1 + (1 + (1 + (1 + 1))) = 5
+
+sorpresa_1(10, 4)
+	toReturn: ((((1) * 10) * 10) * 10) * 10 = 1000
+
+prinf => 6001
