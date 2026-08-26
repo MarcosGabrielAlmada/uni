@@ -4,7 +4,7 @@ int main() {
 	char hex[100], c;
 	int decimal = 0, base = 1, valor_digito, counter;
 
-	printf("Ingrese un numero en notacion binaria: ");
+	printf("Ingrese un numero en notacion hexadecimal: ");
 	scanf("%s", hex);
 
 	while (hex[counter] != '\0') {
@@ -25,7 +25,7 @@ int main() {
 		counter++;
 	}
 
-	printf("%s en decimal es: %d", hex, decimal);
+	printf("%s en decimal es: %d\n", hex, decimal);
 
 	return 0;
 }
