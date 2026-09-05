@@ -1,48 +1,29 @@
 1.
-    a) 2⁰ + 2³ + 2⁵ + 2⁶ + 2⁸ + 2¹¹ = 2409
-    b) 2¹ + 2² + 2⁴ + 2⁵ + 2⁹ = 566
-    c) 2⁻¹ + 2⁻³ + 2⁻⁵ + 2⁻⁶ + 2⁻⁸ = 0.67578125
-    d) 2⁻¹ + 2⁻² + 2⁻⁴ + 2⁻⁷ + 2⁻⁹ = 0.822265625
+    a) (tipo de dato) * (nombre variable) = (direccion en memoria);
+
+    b) todos los tipos de datos puede ser apuntados por un puntero, ya que apuntan a una direccion en memoria
+
+    c) Si, ya que los punteros ocupan 32bits o 64bits(dependiendo de la arquitectuta del procesador)
+
+    d) NULL es una representacion de un puntero nulo, ocupa el mismo espacio que un puntero
+
+    e) Porque permiten mandar por copia una direccion en memoria, permitiendo acceder a la raiz de la variable, de esta manera al modificar el valir de que tiene almacenado X direccion en memoria cambia el valor de la variable.
+    Son necesarios el
+        * para desreferenciar (obtener el valor)
+        & para referenciar (obtener direccion en memoria)
 
 
 2.
-    a) 7 x 8⁰ + 6 x 8¹ + 5 x 8² + 7 x 8³ + 4 x 8⁴ + 5 x 8⁵ = 184183
-    b) 2 x 8⁰ + 1 x 8¹ + 4 x 8² + 5 x 8³ + 7 x 8⁴ = 31498
-    c) 2 x 8⁰ + 1 x 8¹ + 4 x 8² + 7 x 8³ + 6 x 8⁴ = 28426
-    d) 4 x 8⁰ + 0 x 8¹ + 0 x 8² + 2 x 8³ + 1 x 8⁴ + 4 x 8⁵ = 136196
 
-    e) 5 x 8⁻¹ + 3 x 8⁻² + 6 x 8⁻³ + 5 x 8⁻⁴ + 4 = 4.684814453125
-    f) 1 x 8⁻¹ + 2 x 8⁻² + 3 x 8⁻³ + 4 x 8⁻⁴ + 5 x 8⁻⁵ + 6 x 8⁻⁶ + 7 x 8⁻⁷ = 0.16326475143432617
-    g) 4 x 8⁻¹ + 6 x 8⁻² + 5 x 8⁻³ + 6 x 8⁻⁴ + 4 x 8⁻⁵ + 4 x 8⁻⁶ = 0.6051177978515625
-    h) 5 x 8⁻¹ + 4 x 8⁻² + 2 x 8⁻³ = 0.69140625
+x: (direccion en memoria de z)
+y: 3, 4
+z: 3, 4
+
+-------------------------------
+
+x: (direccion en memoria de y)
+y: 3, 4, 5
 
 
 3.
-    a)  5 x 16⁰ + 14 x 16¹ +  3 x 16² +  3 x 16³ = 13285
-    b) 10 x 16⁰ +  7 x 16¹ +  8 x 16² +  4 x 16³ = 18554
-    c)  3 x 16⁰ + 15 x 16¹ +  6 x 16² + 10 x 16³ = 42739
-    d)  5 x 16⁰ +  4 x 16¹ +  3 x 16² + 10 x 16³ = 41797
-
-    e)  5 x 16⁻¹ + 11 x 16⁻² +  8 x 16⁻³ + 12 x 16⁻⁴ = 0.35760498046875
-    f)  5 x 16⁻¹ +  4 x 16⁻² + 15 x 16⁻³ +  0 x 16⁻⁴ = 0.331787109375
-    g)  0 x 16⁻¹ +  6 x 16⁻² +  5 x 16⁻³ +  8 x 16⁻⁴ = 0.0247802734375
-    h) 15 x 16⁻¹ +  9 x 16⁻² + 13 x 16⁻³ + 11 x 16⁻⁴ = 0.9759979248046875
-
-
-4.
-    a) 2³ = 8
-    b) 2⁰ + 2² + 2⁴ + 2⁵ = 53
-    c) 2³ + 2⁵ + 2⁷ = 168
-    d) 2⁰ + 2³ + 2⁴ + 2⁵ + 2⁶ + 2⁸ = 377
-    e) 2⁰ + 2¹ + 2² + 2³ + 2⁹ + 2¹¹ = 2575
-
-
-5.
-    a) 
-    b) 
-    c) 
-    d) 
-    e) 
-
-
 
